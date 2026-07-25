@@ -1,0 +1,228 @@
+/**
+ * @file useExportImage.js
+ * @brief DOM 요소를 이미지로 내보내기 위한 커스텀 훅
+ */
+
+import { useRef, useState, useCallback } from 'react'
+import { toPng } from 'html-to-image'
+
+export const README_EXPORT_WIDTH = 1680
+const EXPORT_FONT_SIZE_INCREMENT = 3
+
+function _getExportWidth(element, exportWidth) {
+  if (typeof exportWidth === 'number') return exportWidth
+  const attrValue = element.dataset?.exportWidth
+  if (!attrValue) return undefined
+
+  const parsed = Number(attrValue)
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
+}
+
+function _nextFrame() {
+  return new Promise(resolve => requestAnimationFrame(() => resolve()))
+}
+
+async function _waitForFrames(count = 2) {
+  for (let i = 0; i < count; i += 1) {
+    await _nextFrame()
+  }
+}
+
+/**
+ * @brief 현재 다크모드 여부 확인
+ * @return {boolean} 다크모드 여부
+ */
+function _isDarkMode() {
+  return document.documentElement.classList.contains('dark')
+}
+
+/**
+ * @brief 내보내기 대상에서 실제 텍스트를 가진 요소의 글자 크기를 임시 확대
+ * @param {HTMLElement} element - 내보내기 루트 요소
+ * @return {Array<{element: Element, fontSize: string}>} 복원용 스타일 목록
+ */
+function _increaseExportFontSizes(element) {
+  const textElements = new Set()
+  const walker = document.createTreeWalker(element, window.NodeFilter.SHOW_TEXT)
+
+  while (walker.nextNode()) {
+    const textNode = walker.currentNode
+    const parentElement = textNode.parentElement
+    if (!textNode.textContent.trim() || !parentElement) continue
+    if (parentElement.closest('[data-export-hide="true"]')) continue
+    textElements.add(parentElement)
+  }
+
+  const records = Array.from(textElements).map(textElement => ({
+    element: textElement,
+    fontSize: textElement.style.fontSize,
+    computedFontSize: Number.parseFloat(getComputedStyle(textElement).fontSize)
+  }))
+
+  records.forEach(({ element: textElement, computedFontSize }) => {
+    if (Number.isFinite(computedFontSize)) {
+      textElement.style.fontSize = `${computedFontSize + EXPORT_FONT_SIZE_INCREMENT}px`
+    }
+  })
+
+  return records
+}
+
+/**
+ * @brief 이미지 내보내기 훅
+ * @param {Object} options - 내보내기 옵션
+ * @param {number} options.exportWidth - 내보내기 시 임시로 적용할 고정 폭
+ * @param {number} options.exportPadding - 캡처 이미지 여백
+ * @param {number} options.pixelRatio - 캡처 pixel ratio
+ * @param {function} options.prepareExport - 캡처 직전 배치 조정 함수
+ * @return {Object} { ref, exportImage, isExporting }
+ */
+export function useExportImage({
+  exportWidth,
+  exportPadding = 16,
+  pixelRatio = 2,
+  prepareExport
+} = {}) {
+  const ref = useRef(null)
+  const [isExporting, setIsExporting] = useState(false)
+
+  /**
+   * @brief 현재 ref 요소를 PNG 이미지로 내보내기
+   * @param {string} filename - 저장할 파일명 (기본: 'export.png')
+   */
+  const exportImage = useCallback(async (filename = 'export.png') => {
+    if (!ref.current) return
+
+    setIsExporting(true)
+    await _waitForFrames(2)
+
+    if (!ref.current) {
+      setIsExporting(false)
+      return
+    }
+
+    const element = ref.current
+    const resolvedExportWidth = _getExportWidth(element, exportWidth)
+    const originalWidth = element.style.width
+    const originalMaxWidth = element.style.maxWidth
+    const originalMinWidth = element.style.minWidth
+
+    // 캡처 전: overflow가 있는 모든 요소를 visible로 변경 (스크롤바 숨김)
+    const overflowElements = element.querySelectorAll('[class*="overflow"]')
+    const originalOverflows = Array.from(overflowElements).map(el => el.style.overflow)
+
+    let exportShowElements = []
+    let exportHideElements = []
+    let exportTextRecords = []
+    let exportCleanup = null
+
+    try {
+      const isDark = _isDarkMode()
+      overflowElements.forEach(el => {
+        el.style.overflow = 'visible'
+      })
+
+      // 필터링할 요소를 크기 측정 전부터 숨겨 빈 캔버스 영역이 남지 않게 한다.
+      exportHideElements = Array.from(element.querySelectorAll('[data-export-hide="true"]')).map(el => ({
+        element: el,
+        display: el.style.display
+      }))
+      exportHideElements.forEach(({ element: hideElement }) => {
+        hideElement.style.display = 'none'
+      })
+
+      if (resolvedExportWidth) {
+        element.style.width = `${resolvedExportWidth}px`
+        element.style.maxWidth = 'none'
+        element.style.minWidth = `${resolvedExportWidth}px`
+        window.dispatchEvent(new Event('resize'))
+        await _waitForFrames(2)
+      }
+
+      // 캡처 전: data-export-show 요소 표시 (워터마크, 내보내기 전용 라벨 등)
+      // 폭 조절 뒤에 다시 조회해야 Recharts가 재배치하며 새로 만든 라벨도 잡힌다.
+      exportShowElements = Array.from(element.querySelectorAll('[data-export-show="true"]'))
+      exportShowElements.forEach(el => {
+        el.classList.remove('hidden')
+      })
+      await _waitForFrames(2)
+
+      exportTextRecords = _increaseExportFontSizes(element)
+      await _waitForFrames(2)
+
+      if (prepareExport) {
+        const cleanup = await prepareExport(element)
+        exportCleanup = typeof cleanup === 'function' ? cleanup : null
+        await _waitForFrames(2)
+      }
+
+      // scrollWidth/scrollHeight로 실제 콘텐츠 크기 측정
+      const width = element.scrollWidth + exportPadding * 2
+      const height = element.scrollHeight + exportPadding * 2
+
+      // 다크모드에 따른 배경색 설정
+      const backgroundColor = isDark ? '#111827' : '#ffffff'
+
+      const dataUrl = await toPng(element, {
+        backgroundColor,
+        pixelRatio,
+        width,
+        height,
+        // data-export-hide 속성을 가진 요소 제외 (버튼 등)
+        filter: (node) => {
+          if (node.dataset?.exportHide === 'true') return false
+          return true
+        },
+        // 여백 추가
+        style: {
+          padding: `${exportPadding}px`
+        }
+      })
+
+      const link = document.createElement('a')
+      link.download = filename
+      link.href = dataUrl
+      link.click()
+    } catch (err) {
+      console.error('이미지 내보내기 실패:', err)
+    } finally {
+      if (exportCleanup) {
+        try {
+          await exportCleanup()
+        } catch (cleanupError) {
+          console.error('이미지 내보내기 배치 복원 실패:', cleanupError)
+        }
+      }
+
+      overflowElements.forEach((el, i) => {
+        el.style.overflow = originalOverflows[i]
+      })
+
+      exportTextRecords.forEach(({ element: textElement, fontSize }) => {
+        textElement.style.fontSize = fontSize
+      })
+      exportHideElements.forEach(({ element: hideElement, display }) => {
+        hideElement.style.display = display
+      })
+
+      const currentExportShowElements = element.querySelectorAll('[data-export-show="true"]')
+      new Set([...exportShowElements, ...currentExportShowElements]).forEach(el => {
+        el.classList.add('hidden')
+      })
+
+      element.style.width = originalWidth
+      element.style.maxWidth = originalMaxWidth
+      element.style.minWidth = originalMinWidth
+
+      setIsExporting(false)
+      await _waitForFrames(2)
+
+      if (resolvedExportWidth) {
+        window.dispatchEvent(new Event('resize'))
+        await _waitForFrames(1)
+      }
+    }
+  }, [exportPadding, exportWidth, pixelRatio, prepareExport])
+
+  return { ref, exportImage, isExporting }
+}

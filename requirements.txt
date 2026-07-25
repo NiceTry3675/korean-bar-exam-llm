@@ -1,0 +1,9 @@
+# Python >=3.10
+pandas>=2.0.0
+openpyxl>=3.1.0
+requests>=2.31.0
+google-genai>=1.50.0
+openai>=1.0.0
+anthropic>=0.40.0
+keyring>=25.7,<26
+olefile>=0.47

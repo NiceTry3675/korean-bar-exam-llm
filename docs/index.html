@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/korean-bar-exam-llm/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>제15회 변호사시험 LLM 풀이 대시보드</title>
+
+    <!-- PWA 메타 태그 -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="LLM 모델의 제15회 변호사시험 선택형 풀이 결과를 비교하는 대시보드" />
+
+    <script>
+      /**
+       * @brief 테마 플래시 방지 스크립트
+       * 페이지 로드 전에 저장된 테마 또는 시스템 설정을 적용
+       */
+      (function() {
+        const theme = localStorage.getItem('theme') || 'system';
+        const isDark = theme === 'dark' ||
+          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      })();
+    </script>
+    <script type="module" crossorigin src="/korean-bar-exam-llm/assets/index-veEzA0MW.js"></script>
+    <link rel="stylesheet" crossorigin href="/korean-bar-exam-llm/assets/index-R5B5UMs4.css">
+  </head>
+  <body>
+    <div id="root"></div>
+
+  </body>
+</html>

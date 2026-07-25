@@ -1,0 +1,93 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+tmp/
+
+# Project specific
+*.xlsx~
+~$*.xlsx
+.~lock.*
+
+# Local exam source documents (public metadata only is tracked)
+*.hwp
+*.hwpx
+*.HWP
+*.HWPX
+*.[hH][wW][pP]
+*.[hH][wW][pP][xX]
+benchmark_models.json
+
+# Problems folder (copyright-sensitive content)
+problems/**
+
+# etc.
+CLAUDE.md
+AGENTS.md
+.claude/
+.mcp.json
+prototype.html
+thesis/
+batch_results/
+outputs/
+
+# Logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+.env
+.env.local
+# GCP 서비스 계정 키
+*.iam.gserviceaccount.com.json
+risu202604-*.json
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+
+# Task files
+tasks.json
+tasks/ 
+.taskmaster/
+
+# Generated web mirror data (manifest.json만 추적되는 PWA 소스)
+web/public/*.json
+!web/public/manifest.json

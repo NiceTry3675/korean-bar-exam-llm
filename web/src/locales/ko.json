@@ -1,0 +1,172 @@
+{
+  "header": {
+    "title": "제15회 변호사시험 LLM 풀이 대시보드",
+    "titleShort": "변시 LLM",
+    "subtitle": "LLM 모델의 제15회 변호사시험 선택형 풀이 결과",
+    "selectBenchmark": "벤치마크 선택",
+    "modeDefault": "문항별",
+    "modeHard": "과목 일괄",
+    "modeDefaultDesc": "모든 문제를 1개씩 따로 해결합니다",
+    "modeHardDesc": "과목 단위로 모든 문제를 동시에 해결합니다"
+  },
+  "tabs": {
+    "overview": "종합 대시보드",
+    "subjects": "과목별 상세",
+    "compare": "모델 비교",
+    "cost": "비용 분석"
+  },
+  "sidebar": {
+    "settings": "설정",
+    "subjectFilter": "과목 필터",
+    "modelFilter": "모델 필터",
+    "selectAll": "전체 선택",
+    "deselectAll": "전체 해제",
+    "sort": "정렬",
+    "exportImage": "이미지로 내보내기",
+    "sortOptions": {
+      "scoreDesc": "점수 높은 순",
+      "scoreAsc": "점수 낮은 순",
+      "nameAsc": "이름 순 (A→Z)",
+      "nameDesc": "이름 역순 (Z→A)",
+      "vendor": "개발사순",
+      "costAsc": "비용 낮은 순",
+      "efficiencyDesc": "효율 높은 순"
+    }
+  },
+  "charts": {
+    "maxPoints": "{{max}}점 만점",
+    "scoreTable": "모델별 점수표",
+    "selectSubject": "과목 선택",
+    "questionStatus": "문항별 정답 현황",
+    "choiceRate": "선지 선택률",
+    "compareModels": "비교할 모델 선택 (최대 5개)",
+    "modelsSelected": "{{count}}개 선택됨",
+    "costVsPerformance": "비용 vs 성능",
+    "tokenUsage": "총 토큰 사용량",
+    "costInfo": "모델별 비용 정보",
+    "modelCompare": "모델 비교 (과목별 정규화 점수)",
+    "showScores": "점수 표시",
+    "accuracy": "정답률",
+    "officialScore": "공식 점수"
+  },
+  "subjects": {
+    "publicLaw": "공법",
+    "civilLaw": "민사법",
+    "criminalLaw": "형사법",
+    "multipleChoice": "선택형"
+  },
+  "table": {
+    "model": "모델",
+    "total": "총점",
+    "inputPrice": "입력 ($/1M)",
+    "outputPrice": "출력 ($/1M)",
+    "inputTokens": "입력 토큰",
+    "outputTokens": "출력 토큰",
+    "totalCost": "총 비용",
+    "score": "총점",
+    "efficiency": "효율",
+    "officialScore": "공식 점수",
+    "accuracy": "정답률"
+  },
+  "heatmap": {
+    "correctCount": "정답 수",
+    "accuracy": "정답률",
+    "showOX": "O/X 표시",
+    "showAnswer": "답 번호 표시",
+    "question": "문항",
+    "answer": "정답",
+    "yourAnswer": "선택",
+    "points": "배점",
+    "correct": "정답",
+    "incorrect": "오답",
+    "refusal": "검열/응답 거부",
+    "refusalShort": "검",
+    "legend": {
+      "refusal": "검열/응답 거부"
+    }
+  },
+  "choice": {
+    "title": "선지 선택률",
+    "questionNum": "{{num}}번",
+    "correctAnswer": "정답: {{answer}}",
+    "selectionRate": "선택률",
+    "modelCount": "{{count}}개 모델",
+    "legend": {
+      "correct": "정답 선지",
+      "incorrect": "오답 선지",
+      "highRate": "높은 선택률",
+      "lowRate": "낮은 선택률"
+    }
+  },
+  "cost": {
+    "noTokenInfo": "토큰 정보 없는 모델",
+    "efficiencyFormula": "효율 = (점수/만점 × 0.7 + (1-비용/최대비용) × 0.3) × 100",
+    "testCost": "테스트 비용",
+    "inputTokensShort": "입력",
+    "outputTokensShort": "출력",
+    "tokens": "토큰",
+    "perMillion": "/M",
+    "axisTestCost": "테스트 비용 ($)",
+    "axisScore": "총점"
+  },
+  "models": {
+    "noVision": "멀티모달 미지원",
+    "nonStandard": "high에서 틀린 문항만 더 높은 추론으로 처리",
+    "postExamKnowledgeCutoff": "문제 학습 가능성 있음",
+    "webServiceNoTools": "도구 차단한 웹 서비스 환경"
+  },
+  "benchmark": {
+    "noExternalSearch": "※ 외부 검색 없이 실행된 결과입니다.",
+    "resultsPendingBadge": "결과 준비 중",
+    "resultsPendingTitle": "모델 실행 결과를 기다리고 있습니다",
+    "resultsPendingDescription": "벤치마크와 화면은 준비되었습니다. 이후 모델 실행 결과를 동기화하면 점수, 정답률, 과목별 상세와 비용 분석이 자동으로 표시됩니다.",
+    "officialMaximum": "공식 만점",
+    "totalQuestions": "전체 문항",
+    "pointsPerQuestion": "문항당 배점",
+    "executionMode": "실행 방식",
+    "sectionSummary": "{{questions}}문항 · {{score}}점"
+  },
+  "tooltip": {
+    "score": "점수",
+    "points": "점",
+    "accuracy": "정답률",
+    "correctCount": "정답 수",
+    "totalQuestions": "문항"
+  },
+  "token": {
+    "total": "총합",
+    "inputOutput": "입력+출력",
+    "outputRatio": "출력 비율",
+    "hidden": "숨김"
+  },
+  "export": {
+    "costAnalysis": "비용_분석",
+    "tokenUsage": "토큰_사용량",
+    "heatmap": "정오표",
+    "choiceRate": "선지_선택률"
+  },
+  "common": {
+    "loading": "데이터 로드 중...",
+    "error": "오류 발생",
+    "noData": "데이터가 없습니다",
+    "noCostData": "비용 데이터가 없습니다",
+    "score": "점수",
+    "correct": "정답",
+    "incorrect": "오답",
+    "points": "점",
+    "all": "전체"
+  },
+  "theme": {
+    "light": "라이트 모드",
+    "dark": "다크 모드",
+    "system": "시스템 설정"
+  },
+  "language": {
+    "ko": "한국어",
+    "en": "English"
+  },
+  "footer": {
+    "lastUpdated": "최종 업데이트",
+    "unofficial": "비공식 프로젝트입니다. 법무부 및 변호사시험 관리기관과 관련이 없습니다."
+  }
+}

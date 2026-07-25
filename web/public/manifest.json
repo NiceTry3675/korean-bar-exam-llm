@@ -1,0 +1,27 @@
+{
+  "name": "제15회 변호사시험 LLM 풀이 대시보드",
+  "short_name": "변시 LLM",
+  "description": "LLM 모델의 제15회 변호사시험 선택형 풀이 결과 대시보드",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "orientation": "any",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "utilities"]
+}

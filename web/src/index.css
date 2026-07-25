@@ -1,0 +1,235 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import "tailwindcss";
+
+/**
+ * @brief Tailwind v4 다크모드 설정
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+ * @brief 커스텀 CSS 변수 및 기본 스타일
+ */
+:root {
+  /* 시맨틱 색상 - 라이트 테마 */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-tertiary: #f3f4f6;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+  --color-border: #e5e7eb;
+
+  /* 차트/히트맵 색상 */
+  --color-correct-high: #22c55e;
+  --color-correct-low: #86efac;
+  --color-incorrect-high: #ef4444;
+  --color-incorrect-low: #fca5a5;
+  --color-no-data: #f0f0f0;
+
+  /* 모델별 브랜드 색상 */
+  --color-gpt: #EA4335;
+  --color-gemini: #4285F4;
+  --color-claude: #D2691E;
+  --color-grok: #6A4C93;
+  --color-deepseek: #1E3A8A;
+  --color-exaone: #A50034;
+}
+
+/**
+ * @brief 다크 테마 색상
+ */
+.dark {
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1f2937;
+  --color-bg-tertiary: #374151;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #6b7280;
+  --color-border: #4b5563;
+
+  /* 다크 테마용 차트 색상 */
+  --color-correct-high: #4ade80;
+  --color-correct-low: #166534;
+  --color-incorrect-high: #f87171;
+  --color-incorrect-low: #991b1b;
+  --color-no-data: #374151;
+}
+
+body {
+  font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+/**
+ * @brief 고난도 모드 accent 색상
+ *
+ * 기존 컴포넌트의 Tailwind blue accent를 유지하면서, 고난도 모드에서는
+ * 활성 버튼/선택/포커스 표시만 어두운 주홍 계열로 치환한다.
+ */
+[data-benchmark-mode="hard"] {
+  --benchmark-accent-50: #fef2f2;
+  --benchmark-accent-100: #fee2e2;
+  --benchmark-accent-200: #fecaca;
+  --benchmark-accent-300: #fca5a5;
+  --benchmark-accent-400: #f97316;
+  --benchmark-accent-500: #dc2f02;
+  --benchmark-accent-600: #c2410c;
+  --benchmark-accent-700: #9a3412;
+  --benchmark-accent-800: #7c2d12;
+  --benchmark-accent-900: #431407;
+}
+
+[data-benchmark-mode="hard"] .bg-blue-50 {
+  background-color: var(--benchmark-accent-50) !important;
+}
+
+[data-benchmark-mode="hard"] .bg-blue-100 {
+  background-color: var(--benchmark-accent-100) !important;
+}
+
+[data-benchmark-mode="hard"] .bg-blue-500 {
+  background-color: var(--benchmark-accent-500) !important;
+}
+
+[data-benchmark-mode="hard"] .hover\:bg-blue-200:hover {
+  background-color: var(--benchmark-accent-200) !important;
+}
+
+[data-benchmark-mode="hard"] .hover\:bg-blue-600:hover {
+  background-color: var(--benchmark-accent-600) !important;
+}
+
+[data-benchmark-mode="hard"] .text-blue-400,
+[data-benchmark-mode="hard"] .text-blue-500,
+[data-benchmark-mode="hard"] .text-blue-600,
+[data-benchmark-mode="hard"] .text-blue-700 {
+  color: var(--benchmark-accent-600) !important;
+}
+
+[data-benchmark-mode="hard"] .hover\:text-blue-700:hover {
+  color: var(--benchmark-accent-700) !important;
+}
+
+[data-benchmark-mode="hard"] .border-blue-300,
+[data-benchmark-mode="hard"] .border-blue-400,
+[data-benchmark-mode="hard"] .border-blue-500 {
+  border-color: var(--benchmark-accent-400) !important;
+}
+
+[data-benchmark-mode="hard"] .border-t-transparent {
+  border-top-color: transparent !important;
+}
+
+[data-benchmark-mode="hard"] input[type="checkbox"],
+[data-benchmark-mode="hard"] input[type="radio"] {
+  accent-color: var(--benchmark-accent-600);
+}
+
+[data-benchmark-mode="hard"] .focus\:border-blue-500:focus {
+  border-color: var(--benchmark-accent-500) !important;
+}
+
+[data-benchmark-mode="hard"] .ring-blue-200,
+[data-benchmark-mode="hard"] .ring-blue-300,
+[data-benchmark-mode="hard"] .focus\:ring-blue-500:focus {
+  --tw-ring-color: var(--benchmark-accent-300) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:bg-blue-900\/30 {
+  background-color: rgb(67 20 7 / 0.3) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:bg-blue-900\/50 {
+  background-color: rgb(67 20 7 / 0.5) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:hover\:bg-blue-800:hover {
+  background-color: var(--benchmark-accent-800) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:text-blue-300,
+.dark [data-benchmark-mode="hard"] .dark\:text-blue-400 {
+  color: var(--benchmark-accent-300) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:hover\:text-blue-300:hover {
+  color: var(--benchmark-accent-200) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:border-blue-700 {
+  border-color: var(--benchmark-accent-700) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:border-blue-500 {
+  border-color: var(--benchmark-accent-500) !important;
+}
+
+.dark [data-benchmark-mode="hard"] .dark\:ring-blue-700,
+.dark [data-benchmark-mode="hard"] .dark\:ring-blue-800 {
+  --tw-ring-color: var(--benchmark-accent-800) !important;
+}
+
+/**
+ * @brief Safe area 지원 (iPhone X 이상)
+ */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+/**
+ * @brief 모바일 가로 모드 최적화
+ * 화면 너비 768px 미만이더라도 가로 모드 + 충분한 높이면 데스크톱 레이아웃 적용
+ */
+@media (orientation: landscape) and (min-height: 500px) and (max-width: 767px) {
+  /* 하단 네비게이션 숨기기 */
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  /* 상단 탭 표시 */
+  .desktop-tabs {
+    display: flex !important;
+  }
+}
+
+/**
+ * @brief 차트 컨테이너 포커스 테두리 제거
+ */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-responsive-container,
+.recharts-responsive-container *,
+svg:focus,
+svg *:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+/* 차트 컨테이너 div 포커스 테두리 제거 */
+div:focus {
+  outline: none !important;
+}
+
+/**
+ * @brief 터치 스크롤 최적화
+ */
+@media (max-width: 767px) {
+  /* 스크롤 영역에 momentum 스크롤 적용 */
+  .overflow-auto,
+  .overflow-y-auto,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 스크롤바 숨기기 (모바일) */
+  .overflow-auto::-webkit-scrollbar,
+  .overflow-y-auto::-webkit-scrollbar {
+    display: none;
+  }
+}

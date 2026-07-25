@@ -1,0 +1,841 @@
+{
+  "version": 1,
+  "benchmark_id": "bar-exam-15",
+  "answer_status": "final_confirmed",
+  "provenance": {
+    "publisher": "대한민국 법무부",
+    "official_questions_url": "https://www.moj.go.kr/bbs/moj/150/602397/artclView.do",
+    "provisional_answers_url": "https://www.moj.go.kr/bbs/moj/151/602396/artclView.do",
+    "final_answers_url": "https://www.moj.go.kr/bbs/moj/151/603464/artclView.do",
+    "final_notice_date": "2026-02-12",
+    "note_ko": "법무부 최종정답 확정 공지에 따라 2026-01-10 공개된 정답가안을 변경 없이 최종정답으로 사용한다.",
+    "note_en": "The Ministry of Justice final notice confirmed the provisional answers published on 2026-01-10 without changes.",
+    "content_license": {
+      "name_ko": "공공누리 제1유형",
+      "name_en": "Korea Open Government License Type 1",
+      "url": "https://www.kogl.or.kr/info/userGuide.do",
+      "attribution_required": true,
+      "repository_license_separate": true
+    },
+    "source_files": [
+      {
+        "role": "questions",
+        "subject_id": "public-law",
+        "filename": "제15회 변호사시험 공법 선택형.hwp",
+        "sha256": "17c8ed9064c75e771646edd1ad35ebf915b3ea8a62251eadbf4ccfffacb71f4c"
+      },
+      {
+        "role": "answers",
+        "subject_id": "public-law",
+        "filename": "변호사시험 정답가안(공법 선택형).hwp",
+        "sha256": "85e0fa785b4fbb0b46d50063a3012f359fb85d3439023b52e51a624d33ca3217"
+      },
+      {
+        "role": "questions",
+        "subject_id": "civil-law",
+        "filename": "제15회 변호사시험 민사법 선택형.hwp",
+        "sha256": "97b78c3fbf130cd066e7adbac9783e48ffd75bcf8c9527ded93600ad01f12faf"
+      },
+      {
+        "role": "answers",
+        "subject_id": "civil-law",
+        "filename": "변호사시험 정답가안(민사법 선택형).hwp",
+        "sha256": "853e0cb0ce0db6adf88ec081c983c153af12f133f6e000f4bc7c143146d1938a"
+      },
+      {
+        "role": "questions",
+        "subject_id": "criminal-law",
+        "filename": "제15회 변호사시험 형사법 선택형.hwp",
+        "sha256": "dad5b6e8b3890cbbf952a8183146950c046d2b145e0a2b5e246326df9ed4a13b"
+      },
+      {
+        "role": "answers",
+        "subject_id": "criminal-law",
+        "filename": "변호사시험 정답가안(형사법 선택형).hwp",
+        "sha256": "83ec2e7f876f626a028fba4b44c184b49a08a129271ba0ef439d3a679b9ed30b"
+      }
+    ]
+  },
+  "subjects": [
+    {
+      "id": "public-law",
+      "subject": "공법",
+      "section": "공법",
+      "sheet_name": "공법",
+      "question_count": 40,
+      "max_points": 100,
+      "questions": [
+        {
+          "number": 1,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 2,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 3,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 4,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 5,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 6,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 7,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 8,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 9,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 10,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 11,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 12,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 13,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 14,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 15,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 16,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 17,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 18,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 19,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 20,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 21,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 22,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 23,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 24,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 25,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 26,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 27,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 28,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 29,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 30,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 31,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 32,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 33,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 34,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 35,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 36,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 37,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 38,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 39,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 40,
+          "correct_answer": 4,
+          "points": 2.5
+        }
+      ]
+    },
+    {
+      "id": "civil-law",
+      "subject": "민사법",
+      "section": "민사법",
+      "sheet_name": "민사법",
+      "question_count": 70,
+      "max_points": 175,
+      "questions": [
+        {
+          "number": 1,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 2,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 3,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 4,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 5,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 6,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 7,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 8,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 9,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 10,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 11,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 12,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 13,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 14,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 15,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 16,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 17,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 18,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 19,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 20,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 21,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 22,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 23,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 24,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 25,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 26,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 27,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 28,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 29,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 30,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 31,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 32,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 33,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 34,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 35,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 36,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 37,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 38,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 39,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 40,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 41,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 42,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 43,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 44,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 45,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 46,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 47,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 48,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 49,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 50,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 51,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 52,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 53,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 54,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 55,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 56,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 57,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 58,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 59,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 60,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 61,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 62,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 63,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 64,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 65,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 66,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 67,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 68,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 69,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 70,
+          "correct_answer": 4,
+          "points": 2.5
+        }
+      ]
+    },
+    {
+      "id": "criminal-law",
+      "subject": "형사법",
+      "section": "형사법",
+      "sheet_name": "형사법",
+      "question_count": 40,
+      "max_points": 100,
+      "questions": [
+        {
+          "number": 1,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 2,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 3,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 4,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 5,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 6,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 7,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 8,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 9,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 10,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 11,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 12,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 13,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 14,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 15,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 16,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 17,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 18,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 19,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 20,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 21,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 22,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 23,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 24,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 25,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 26,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 27,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 28,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 29,
+          "correct_answer": 1,
+          "points": 2.5
+        },
+        {
+          "number": 30,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 31,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 32,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 33,
+          "correct_answer": 2,
+          "points": 2.5
+        },
+        {
+          "number": 34,
+          "correct_answer": 4,
+          "points": 2.5
+        },
+        {
+          "number": 35,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 36,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 37,
+          "correct_answer": 3,
+          "points": 2.5
+        },
+        {
+          "number": 38,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 39,
+          "correct_answer": 5,
+          "points": 2.5
+        },
+        {
+          "number": 40,
+          "correct_answer": 4,
+          "points": 2.5
+        }
+      ]
+    }
+  ]
+}

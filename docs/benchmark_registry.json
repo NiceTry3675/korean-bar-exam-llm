@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "defaultBenchmark": "bar-exam-15",
+  "benchmarks": [
+    {
+      "id": "bar-exam-15",
+      "title": {
+        "ko": "제15회 변호사시험 선택형",
+        "en": "15th Korean Bar Examination (Multiple Choice)"
+      },
+      "navigation": {
+        "visible": true,
+        "visibleWhenResults": true
+      },
+      "scoring": {
+        "type": "sum",
+        "maxScore": 375,
+        "totalQuestions": 150,
+        "pointsPerQuestion": 2.5
+      },
+      "modes": {
+        "default": {
+          "results": "bar_exam_all_results.json",
+          "tokenUsage": "bar_exam_token_usage.json",
+          "label": {
+            "ko": "문항별",
+            "en": "Question-by-question"
+          },
+          "workbook": "제15회 변호사시험 LLM 풀이.xlsx"
+        },
+        "hard": {
+          "results": "bar_exam_hard_all_results.json",
+          "tokenUsage": "bar_exam_hard_token_usage.json",
+          "label": {
+            "ko": "과목 일괄",
+            "en": "Whole subject"
+          },
+          "workbook": "제15회 변호사시험 LLM 풀이 hard.xlsx"
+        }
+      },
+      "sections": [
+        {
+          "id": "public-law",
+          "sheet": "공법",
+          "subject": "공법",
+          "section": "공법",
+          "questionCount": 40,
+          "maxScore": 100,
+          "problemDir": "problems/bar-exam-15/public-law",
+          "metadataPath": "benchmarks/bar-exam-15/questions.json"
+        },
+        {
+          "id": "civil-law",
+          "sheet": "민사법",
+          "subject": "민사법",
+          "section": "민사법",
+          "questionCount": 70,
+          "maxScore": 175,
+          "problemDir": "problems/bar-exam-15/civil-law",
+          "metadataPath": "benchmarks/bar-exam-15/questions.json"
+        },
+        {
+          "id": "criminal-law",
+          "sheet": "형사법",
+          "subject": "형사법",
+          "section": "형사법",
+          "questionCount": 40,
+          "maxScore": 100,
+          "problemDir": "problems/bar-exam-15/criminal-law",
+          "metadataPath": "benchmarks/bar-exam-15/questions.json"
+        }
+      ],
+      "contentIncluded": false,
+      "sources": [
+        {
+          "role": "questions",
+          "title": "법무부 제15회 변호사시험 선택형 문제",
+          "url": "https://www.moj.go.kr/bbs/moj/150/602397/artclView.do"
+        },
+        {
+          "role": "final-answers",
+          "title": "법무부 제15회 변호사시험 최종정답 확정",
+          "url": "https://www.moj.go.kr/bbs/moj/151/603464/artclView.do"
+        },
+        {
+          "role": "license",
+          "title": "공공누리 제1유형 이용조건",
+          "url": "https://www.kogl.or.kr/info/userGuide.do"
+        }
+      ]
+    }
+  ]
+}
