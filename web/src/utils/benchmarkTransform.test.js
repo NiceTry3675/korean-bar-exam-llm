@@ -108,6 +108,45 @@ test('결과가 없으면 숨김 정책 벤치마크는 메뉴에 노출하지 �
   )
 })
 
+test('v2 필드가 없으면 관대 채점 합계는 공식 점수와 같다', () => {
+  const result = calculateBenchmarkScore(data, 'Fixture', benchmark)
+  assert.equal(result.totalLenient, result.total)
+  assert.equal(result.correctCountLenient, result.correctCount)
+  result.sectionScores.forEach(section => {
+    assert.equal(section.scoreLenient, section.score)
+  })
+})
+
+test('v2 점수는 과목별로 합산되고 공식 점수를 바꾸지 않는다', () => {
+  const lenientData = data.map(record => (
+    record.sheet_name === '공법'
+      ? { ...record, score_lenient: 100, correct_count_lenient: 40 }
+      : record
+  ))
+  const result = calculateBenchmarkScore(lenientData, 'Fixture', benchmark)
+
+  assert.equal(result.total, 322.5, '공식 점수는 v1 그대로다')
+  assert.equal(result.totalLenient, 325)
+  assert.equal(result.correctCount, 129)
+  assert.equal(result.correctCountLenient, 130)
+
+  const publicLaw = result.sectionScores.find(section => section.sheet === '공법')
+  assert.equal(publicLaw.score, 97.5)
+  assert.equal(publicLaw.scoreLenient, 100)
+})
+
+test('과목 필터를 적용하면 해당 과목의 v2 점수만 합산한다', () => {
+  const lenientData = data.map(record => (
+    record.sheet_name === '공법'
+      ? { ...record, score_lenient: 100 }
+      : { ...record, score_lenient: record.score + 5 }
+  ))
+  const result = calculateBenchmarkScore(lenientData, 'Fixture', benchmark, ['공법'])
+
+  assert.equal(result.total, 97.5)
+  assert.equal(result.totalLenient, 100)
+})
+
 test('공급자가 기록한 실제 비용을 가격표 재계산보다 우선한다', () => {
   const costData = getCostData(
     [{

@@ -5,12 +5,11 @@
 
 import { useTranslation } from 'react-i18next'
 import { useData } from '@/hooks/useData'
-import { getAnyModelFlags } from '@/utils/modelMeta'
-import { MODEL_COLORS } from '@/utils/colorUtils'
+import { getAnyModelFlags, getPostExamKnowledgeCutoffModels } from '@/utils/modelMeta'
 
 /**
  * @brief 범례용 미니 사각형 SVG
- * @param {{ type: 'noVision' | 'nonStandard' | 'postExamKnowledgeCutoff' | 'webServiceNoTools' }} props
+ * @param {{ type: 'noVision' | 'nonStandard' | 'webServiceNoTools' }} props
  */
 function _LegendSwatch({ type }) {
   const size = 14
@@ -28,38 +27,6 @@ function _LegendSwatch({ type }) {
         </defs>
         <rect width={size} height={size} rx={2} fill="#888" />
         <rect width={size} height={size} rx={2} fill="url(#legend-web-service-no-tools-checker)" />
-      </svg>
-    )
-  }
-
-  if (type === 'postExamKnowledgeCutoff') {
-    const colors = [MODEL_COLORS.GPT, MODEL_COLORS.Claude, MODEL_COLORS.Grok]
-    const barWidth = 4
-    return (
-      <svg width={size + 4} height={size} className="inline-block align-middle mr-1 shrink-0 overflow-visible">
-        <defs>
-          <filter id="legend-post-exam-cutoff-glow" x="-18%" y="-25%" width="136%" height="150%">
-            <feGaussianBlur stdDeviation="0.8" />
-          </filter>
-        </defs>
-        {colors.map((color, i) => {
-          const x = 1 + i * (barWidth + 1)
-          return (
-            <g key={color}>
-              <rect
-                x={x - 0.5}
-                y={1}
-                width={barWidth + 1}
-                height={size - 2}
-                rx={1}
-                fill={color}
-                opacity={0.9}
-                filter="url(#legend-post-exam-cutoff-glow)"
-              />
-              <rect x={x} y={1} width={barWidth} height={size - 2} rx={1} fill={color} />
-            </g>
-          )
-        })}
       </svg>
     )
   }
@@ -110,11 +77,20 @@ export default function BenchmarkNote({
   const { t } = useTranslation()
   const { modelMetadata: contextModelMetadata } = useData()
   const flags = getAnyModelFlags(modelNames, modelMetadata ?? contextModelMetadata)
+  // 어떤 모델을 가리키는지 모호하지 않도록 계열명을 직접 적는다
+  const postExamCutoffModels = getPostExamKnowledgeCutoffModels(modelNames)
 
   return (
     <div className={className}>
       <p>{t('benchmark.noExternalSearch')}</p>
-      {(flags.hasNoVision || flags.hasNonStandard || flags.hasPostExamKnowledgeCutoff || flags.hasWebServiceNoTools) && (
+      {postExamCutoffModels.length > 0 && (
+        <p>
+          {t('models.postExamKnowledgeCutoffNamed', {
+            models: postExamCutoffModels.join(', ')
+          })}
+        </p>
+      )}
+      {(flags.hasNoVision || flags.hasNonStandard || flags.hasWebServiceNoTools) && (
         <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
           {flags.hasNoVision && (
             <span className="inline-flex items-center">
@@ -126,12 +102,6 @@ export default function BenchmarkNote({
             <span className="inline-flex items-center">
               <_LegendSwatch type="nonStandard" />
               {t('models.nonStandard')}
-            </span>
-          )}
-          {flags.hasPostExamKnowledgeCutoff && (
-            <span className="inline-flex items-center">
-              <_LegendSwatch type="postExamKnowledgeCutoff" />
-              {t('models.postExamKnowledgeCutoff')}
             </span>
           )}
           {flags.hasWebServiceNoTools && (

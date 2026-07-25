@@ -22,9 +22,9 @@ import { ModelSelectDropdown } from '@/components/common'
 import { getCostData } from '@/utils/costTransform'
 import { transformToHeatmapData } from '@/utils/heatmapTransform'
 import { transformToChoiceData } from '@/utils/choiceTransform'
-import { getModelColor, VENDORS, groupModelsByVendor, getSortedVendors, getDefaultSelectedModels } from '@/utils/colorUtils'
+import { VENDORS, groupModelsByVendor, getSortedVendors, getDefaultSelectedModels } from '@/utils/colorUtils'
 import { getDashboardQueryState } from '@/utils/urlState'
-import { formatModelDisplayName } from '@/utils/modelMeta'
+import { formatModelDisplayName, getEffortTier } from '@/utils/modelMeta'
 import { translateSubject } from '@/utils/subjectLabels'
 import { DEFAULT_BENCHMARK_ID, getBenchmarkSections, getLocalizedRegistryText } from '@/utils/benchmarkRegistry'
 import {
@@ -181,19 +181,49 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
     setIsDefaultModelSelectionReady(true)
   }, [loading, data, models, dataMode, dataBenchmarkId, benchmark, benchmarkMode, isDefaultModelSelectionReady, isModelSelectionTouched])
 
+  // 모델 필터만 적용 (정렬 전 단계 — 비용 데이터 계산의 기준)
+  const modelFilteredScores = useMemo(() => {
+    if (filters.models.length === 0) return overallScores
+    return overallScores.filter(s => filters.models.includes(s.model))
+  }, [overallScores, filters.models])
+
+  // 비용 데이터 (모델 필터링 + 과목 필터링 적용, 정렬과 무관)
+  const costBasis = useMemo(() => {
+    if (!data?.length || !modelFilteredScores?.length) return []
+    return getCostData(data, modelFilteredScores, tokenUsage || {}, filters.subjects, maxScore)
+  }, [data, modelFilteredScores, tokenUsage, filters.subjects, maxScore])
+
+  const costByModel = useMemo(
+    () => new Map(costBasis.map(item => [item.model, item])),
+    [costBasis]
+  )
+
   // 필터 및 정렬 적용
   const filteredScores = useMemo(() => {
-    let result = [...overallScores]
-
-    // 모델 필터
-    if (filters.models.length > 0) {
-      result = result.filter(s => filters.models.includes(s.model))
-    }
+    const result = [...modelFilteredScores]
 
     // 정렬
     switch (filters.sortBy) {
       case 'score_asc':
-        result.sort((a, b) => a.total - b.total)
+        result.sort((a, b) => (a.totalLenient - b.totalLenient) || (a.total - b.total))
+        break
+      case 'cost_asc':
+        // 비용 정보가 없는 모델은 뒤로 보낸다
+        result.sort((a, b) => {
+          const costA = costByModel.get(a.model)?.totalCost || 0
+          const costB = costByModel.get(b.model)?.totalCost || 0
+          if (costA > 0 !== costB > 0) return costA > 0 ? -1 : 1
+          if (costA !== costB) return costA - costB
+          return a.model.localeCompare(b.model)
+        })
+        break
+      case 'efficiency_desc':
+        result.sort((a, b) => {
+          const efficiencyA = costByModel.get(a.model)?.efficiency || 0
+          const efficiencyB = costByModel.get(b.model)?.efficiency || 0
+          if (efficiencyA !== efficiencyB) return efficiencyB - efficiencyA
+          return b.total - a.total
+        })
         break
       case 'name_asc':
         result.sort((a, b) => a.model.localeCompare(b.model))
@@ -214,11 +244,12 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
         break
       case 'score_desc':
       default:
-        result.sort((a, b) => b.total - a.total)
+        // v2(관대 채점) 점수를 우선 기준으로 삼고, 동점이면 공식 점수로 가른다
+        result.sort((a, b) => (b.totalLenient - a.totalLenient) || (b.total - a.total))
     }
 
     return result
-  }, [overallScores, filters])
+  }, [modelFilteredScores, filters.sortBy, costByModel])
 
   // 보기 모드에 따른 점수 차트 데이터
   const scoreChartData = useMemo(() => {
@@ -227,18 +258,34 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
     return filteredScores.map(s => ({
       model: s.model,
       score: s.total,
+      lenientScore: s.totalLenient,
+      lenientDelta: Math.max(0, (s.totalLenient ?? s.total) - s.total),
       totalPoints: maxScore,
       correctCount: s.correctCount,
-      totalQuestions: s.totalQuestions,
-      color: getModelColor(s.model)
+      totalQuestions: s.totalQuestions
     }))
   }, [data, filteredScores, maxScore])
 
-  // 비용 데이터 (모델 필터링 + 과목 필터링 적용)
-  const costData = useMemo(() => {
-    if (!data?.length || !filteredScores?.length) return []
-    return getCostData(data, filteredScores, tokenUsage || {}, filters.subjects, maxScore)
-  }, [data, filteredScores, tokenUsage, filters.subjects, maxScore])
+  // 추론 수준별 점수 차트 데이터 (고추론: max·high / 저추론: none·low)
+  const scoreChartDataByEffort = useMemo(() => ({
+    high: scoreChartData.filter(item => getEffortTier(item.model) !== 'low'),
+    low: scoreChartData.filter(item => getEffortTier(item.model) === 'low')
+  }), [scoreChartData])
+
+  // 양쪽 등급에 모델이 있을 때만 차트를 나눈다 (접미사가 없는 벤치마크는 단일 차트)
+  const scoreChartSplitByEffort = (
+    scoreChartDataByEffort.high.length > 0 && scoreChartDataByEffort.low.length > 0
+  )
+
+  const scoreChartSubtitle = filters.subjects.length === 0
+    ? null
+    : filters.subjects.map(subject => translateSubject(subject, t)).join(', ')
+
+  // 정렬 순서를 반영한 비용 데이터
+  const costData = useMemo(
+    () => filteredScores.map(s => costByModel.get(s.model)).filter(Boolean),
+    [filteredScores, costByModel]
+  )
 
   // 히트맵 데이터
   const heatmapData = useMemo(() => {
@@ -593,23 +640,47 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
             {/* 종합 대시보드 탭 */}
             {activeTab === 'overview' && (
               <>
-                <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-                  <ScoreBarChart
-                    data={scoreChartData}
-                    maxScore={maxScore}
-                    title={`${t('charts.officialScore')} (${t('charts.maxPoints', { max: maxScore })})`}
-                    subtitle={
-                      filters.subjects.length === 0
-                        ? null
-                        : filters.subjects.map(subject => translateSubject(subject, t)).join(', ')
-                    }
-                    hoveredModel={hoveredModel}
-                    onModelHover={setHoveredModel}
-                    modelMetadata={modelMetadata}
-                  />
-                </div>
+                {scoreChartSplitByEffort ? (
+                  [
+                    { tier: 'high', label: t('charts.effortHigh'), exportKey: 'overview-score-chart-high' },
+                    { tier: 'low', label: t('charts.effortLow'), exportKey: 'overview-score-chart-low' }
+                  ].map(({ tier, label, exportKey }) => (
+                    <div key={tier} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                      <ScoreBarChart
+                        data={scoreChartDataByEffort[tier]}
+                        maxScore={maxScore}
+                        title={`${t('charts.officialScore')} · ${label} (${t('charts.maxPoints', { max: maxScore })})`}
+                        subtitle={scoreChartSubtitle}
+                        hoveredModel={hoveredModel}
+                        onModelHover={setHoveredModel}
+                        modelMetadata={modelMetadata}
+                        exportKey={exportKey}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                    <ScoreBarChart
+                      data={scoreChartData}
+                      maxScore={maxScore}
+                      title={`${t('charts.officialScore')} (${t('charts.maxPoints', { max: maxScore })})`}
+                      subtitle={scoreChartSubtitle}
+                      hoveredModel={hoveredModel}
+                      onModelHover={setHoveredModel}
+                      modelMetadata={modelMetadata}
+                    />
+                  </div>
+                )}
                 {/* 점수 차트의 SVG가 카드 경계를 넘어 그려지므로, 아래 카드가
                     그 위에 오도록 stacking context를 만든다 (내보내기 버튼 클릭 차단 방지) */}
+                <div className="relative z-10 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                  <CostScatterChart
+                    data={costData}
+                    title={t('charts.costVsPerformance')}
+                    maxScore={maxScore}
+                    exportKey="overview-cost-scatter"
+                  />
+                </div>
                 <div className="relative z-10 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
                   <BenchmarkScoreTable
                     data={filteredScores}

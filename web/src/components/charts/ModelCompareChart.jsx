@@ -169,8 +169,8 @@ export default function ModelCompareChart({
               key={`hover-${hoveredModel}`}
               name={formatModelDisplayName(hoveredModel)}
               dataKey={hoveredModel}
-              stroke={getModelColor(hoveredModel)}
-              fill={getModelColor(hoveredModel)}
+              stroke={getModelColor(hoveredModel, isDark)}
+              fill={getModelColor(hoveredModel, isDark)}
               fillOpacity={0.3}
               strokeWidth={2}
               strokeOpacity={0.6}
@@ -184,8 +184,8 @@ export default function ModelCompareChart({
               key={model}
               name={formatModelDisplayName(model)}
               dataKey={model}
-              stroke={getModelColor(model)}
-              fill={getModelColor(model)}
+              stroke={getModelColor(model, isDark)}
+              fill={getModelColor(model, isDark)}
               fillOpacity={
                 !hoveredModel ? 0.2 :
                 hoveredModel === model ? 0.5 : 0.05

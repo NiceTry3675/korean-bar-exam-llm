@@ -47,7 +47,11 @@
     "modelCompare": "모델 비교 (과목별 정규화 점수)",
     "showScores": "점수 표시",
     "accuracy": "정답률",
-    "officialScore": "공식 점수"
+    "officialScore": "공식 점수",
+    "effortHigh": "고추론",
+    "effortLow": "저추론",
+    "lenientLegend": "회색: v2(관대 채점) 추가 점수",
+    "effortChainLegend": "점선: 같은 모델의 추론 수준 연결"
   },
   "subjects": {
     "publicLaw": "공법",
@@ -112,7 +116,7 @@
   "models": {
     "noVision": "멀티모달 미지원",
     "nonStandard": "high에서 틀린 문항만 더 높은 추론으로 처리",
-    "postExamKnowledgeCutoff": "문제 학습 가능성 있음",
+    "postExamKnowledgeCutoffNamed": "※ {{models}}: 문제 학습 가능성 있음 (지식 컷오프가 시험일 이후)",
     "webServiceNoTools": "도구 차단한 웹 서비스 환경"
   },
   "benchmark": {
@@ -128,6 +132,7 @@
   },
   "tooltip": {
     "score": "점수",
+    "lenientScore": "v2(관대 채점)",
     "points": "점",
     "accuracy": "정답률",
     "correctCount": "정답 수",

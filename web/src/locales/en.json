@@ -47,7 +47,11 @@
     "modelCompare": "Model Comparison (Normalized by Subject)",
     "showScores": "Show Scores",
     "accuracy": "Accuracy",
-    "officialScore": "Official Score"
+    "officialScore": "Official Score",
+    "effortHigh": "High reasoning",
+    "effortLow": "Low reasoning",
+    "lenientLegend": "Gray: v2 (lenient scoring) bonus",
+    "effortChainLegend": "Dashed line: same model across reasoning levels"
   },
   "subjects": {
     "publicLaw": "Public Law",
@@ -112,7 +116,7 @@
   "models": {
     "noVision": "No multimodal support",
     "nonStandard": "Only wrong answers from high retested with higher reasoning",
-    "postExamKnowledgeCutoff": "Possible exposure to exam content",
+    "postExamKnowledgeCutoffNamed": "※ {{models}}: possible exposure to exam content (knowledge cutoff is after the exam date)",
     "webServiceNoTools": "Web service environment with tools disabled"
   },
   "benchmark": {
@@ -128,6 +132,7 @@
   },
   "tooltip": {
     "score": "Score",
+    "lenientScore": "v2 (lenient)",
     "points": "pts",
     "accuracy": "Accuracy",
     "correctCount": "Correct",

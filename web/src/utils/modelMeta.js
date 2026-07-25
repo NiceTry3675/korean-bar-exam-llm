@@ -73,6 +73,25 @@ export function hasPostExamKnowledgeCutoff(modelName) {
 }
 
 /**
+ * @brief 지식 컷오프가 시험일 이후인 모델의 계열명 목록
+ *
+ * 어떤 모델을 가리키는지 범례에 직접 적기 위한 목록이며, 추론 강도 접미사를
+ * 제거하고 중복을 없앤 계열명을 등장 순서대로 반환한다.
+ *
+ * @param {string[]} models - 모델명 배열
+ * @return {string[]} 계열명 배열 (예: ['Claude Opus 5'])
+ */
+export function getPostExamKnowledgeCutoffModels(models = []) {
+  const names = []
+  models.forEach(model => {
+    if (!hasPostExamKnowledgeCutoff(model)) return
+    const { base } = parseEffortSuffix(formatModelDisplayName(model))
+    if (!names.includes(base)) names.push(base)
+  })
+  return names
+}
+
+/**
  * @brief 도구 차단 웹 서비스 환경에서 실행한 모델 여부
  * @param {string} modelName - 모델명
  * @param {Object} modelMetadata - 모델별 메타데이터
@@ -82,17 +101,53 @@ export function hasWebServiceNoTools(modelName, modelMetadata = {}) {
   return modelMetadata?.[modelName]?.webServiceNoTools === true
 }
 
+/** @brief 모델명 끝의 추론 강도 접미사 */
+const EFFORT_SUFFIX_PATTERN = /\s*\((max|high|low|none)\)\s*$/i
+
+/**
+ * @brief 모델명에서 추론 강도 접미사를 분리한다.
+ *
+ * 공개 JSON에는 추론 설정이 별도 필드로 없고 모델명 접미사만 남아 있으므로
+ * 이름에서 직접 추출한다.
+ *
+ * @param {string} modelName - 모델명
+ * @return {{ base: string, effort: string|null }} 접미사를 제거한 이름과 추론 강도
+ */
+export function parseEffortSuffix(modelName) {
+  const name = typeof modelName === 'string' ? modelName : ''
+  const matched = name.match(EFFORT_SUFFIX_PATTERN)
+  if (!matched) return { base: name.trim(), effort: null }
+  return {
+    base: name.slice(0, matched.index).trim(),
+    effort: matched[1].toLowerCase()
+  }
+}
+
+/**
+ * @brief 추론 강도를 고추론/저추론 두 등급으로 묶는다.
+ *
+ * Gemini는 max·none 단계가 없어 high/low만 사용하므로 같은 규칙으로 처리된다.
+ *
+ * @param {string} modelName - 모델명
+ * @return {string|null} 'high' | 'low' | 접미사가 없으면 null
+ */
+export function getEffortTier(modelName) {
+  const { effort } = parseEffortSuffix(modelName)
+  if (effort === 'max' || effort === 'high') return 'high'
+  if (effort === 'low' || effort === 'none') return 'low'
+  return null
+}
+
 /**
  * @brief 모델의 시각적 플래그 반환
  * @param {string} modelName - 모델명
  * @param {Object} modelMetadata - 모델별 메타데이터
- * @return {{ noVision: boolean, nonStandard: boolean, postExamKnowledgeCutoff: boolean, webServiceNoTools: boolean }}
+ * @return {{ noVision: boolean, nonStandard: boolean, webServiceNoTools: boolean }}
  */
 export function getModelFlags(modelName, modelMetadata = {}) {
   return {
     noVision: hasNoVision(modelName, modelMetadata),
     nonStandard: isNonStandard(modelName),
-    postExamKnowledgeCutoff: hasPostExamKnowledgeCutoff(modelName),
     webServiceNoTools: hasWebServiceNoTools(modelName, modelMetadata)
   }
 }
@@ -101,13 +156,12 @@ export function getModelFlags(modelName, modelMetadata = {}) {
  * @brief 모델 목록에 플래그가 있는 모델이 포함되어 있는지 확인
  * @param {string[]} models - 모델명 배열
  * @param {Object} modelMetadata - 모델별 메타데이터
- * @return {{ hasNoVision: boolean, hasNonStandard: boolean, hasPostExamKnowledgeCutoff: boolean, hasWebServiceNoTools: boolean }}
+ * @return {{ hasNoVision: boolean, hasNonStandard: boolean, hasWebServiceNoTools: boolean }}
  */
 export function getAnyModelFlags(models = [], modelMetadata = {}) {
   return {
     hasNoVision: models.some(model => hasNoVision(model, modelMetadata)),
     hasNonStandard: models.some(isNonStandard),
-    hasPostExamKnowledgeCutoff: models.some(hasPostExamKnowledgeCutoff),
     hasWebServiceNoTools: models.some(model => hasWebServiceNoTools(model, modelMetadata))
   }
 }

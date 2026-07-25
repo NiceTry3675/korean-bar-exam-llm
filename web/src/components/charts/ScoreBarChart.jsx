@@ -28,6 +28,24 @@ const MAX_LINES = 3
 const MOBILE_WRAP_THRESHOLD = 17
 
 /**
+ * @brief v2(관대 채점) 추가 점수 막대 색상
+ *
+ * 모델 색상과 구분되는 중립 회색이며, 각 테마의 배경에서 대비를 확보한 값이다.
+ */
+const LENIENT_DELTA_COLOR = { light: '#6B7280', dark: '#9CA3AF' }
+
+/** @brief v1 막대와 v2 막대를 시각적으로 분리하는 간격(px) */
+const LENIENT_SEGMENT_GAP = 2
+
+/**
+ * @brief v2 막대의 최소 렌더링 두께(px)
+ *
+ * 2.5점처럼 작은 차이는 간격을 빼면 사라지므로, 끝점(v2 총점)은 유지한 채
+ * 최소 두께를 보장한다.
+ */
+const LENIENT_SEGMENT_MIN_THICKNESS = 1.5
+
+/**
  * @brief 긴 텍스트를 중간 공백에서 줄바꿈 (모바일용)
  * @param {string} text - 분할할 텍스트
  * @param {number} threshold - 줄바꿈 적용 기준 길이
@@ -160,9 +178,6 @@ function HatchPatternDefs({ darkMode }) {
         <stop offset="0%" stopColor={`rgba(${shadowRgb},${shadowAlpha})`} />
         <stop offset="100%" stopColor={`rgba(${shadowRgb},0)`} />
       </linearGradient>
-      <filter id="post-exam-cutoff-glow" x="-8%" y="-24%" width="116%" height="148%">
-        <feGaussianBlur stdDeviation="1.35" />
-      </filter>
     </defs>
   )
 }
@@ -189,24 +204,6 @@ function _InnerShadowOverlay({ x, y, width, height }) {
 }
 
 /**
- * @brief 지식 컷오프가 시험일 이후인 모델용 모델 색상 그림자
- */
-function _PostExamKnowledgeCutoffGlow({ x, y, width, height, radius, color }) {
-  return (
-    <Rectangle
-      x={x - 0.5}
-      y={y - 0.5}
-      width={width + 1}
-      height={height + 1}
-      fill={color}
-      opacity={0.9}
-      radius={radius}
-      filter="url(#post-exam-cutoff-glow)"
-    />
-  )
-}
-
-/**
  * @brief 도구 차단 웹 서비스 환경 모델용 체크무늬 오버레이
  */
 function _WebServiceNoToolsChecker({ x, y, width, height, radius }) {
@@ -222,9 +219,9 @@ function _WebServiceNoToolsChecker({ x, y, width, height, radius }) {
   )
 }
 
-function _renderBar(props, { hoveredModel, radius = [4, 4, 0, 0], colorOverride, modelMetadata = {} }) {
+function _renderBar(props, { hoveredModel, radius = [4, 4, 0, 0], colorOverride, modelMetadata = {}, darkMode = false }) {
   const { x, y, width, height, payload } = props
-  const color = colorOverride || payload.color || getModelColor(payload.model)
+  const color = colorOverride || payload.color || getModelColor(payload.model, darkMode)
   const isHovered = hoveredModel === payload.model
   const hasHover = hoveredModel !== null
   const opacity = hasHover ? (isHovered ? 1 : 0.3) : 1
@@ -232,12 +229,9 @@ function _renderBar(props, { hoveredModel, radius = [4, 4, 0, 0], colorOverride,
   const flags = getModelFlags(payload.model, modelMetadata)
   const transitionStyle = { transition: 'opacity 0.15s ease-in-out' }
 
-  if (flags.noVision || flags.nonStandard || flags.postExamKnowledgeCutoff || flags.webServiceNoTools) {
+  if (flags.noVision || flags.nonStandard || flags.webServiceNoTools) {
     return (
       <g style={transitionStyle} opacity={opacity}>
-        {flags.postExamKnowledgeCutoff && (
-          <_PostExamKnowledgeCutoffGlow x={x} y={y} width={width} height={height} radius={radius} color={color} />
-        )}
         <Rectangle x={x} y={y} width={width} height={height} fill={color} radius={radius} />
         {flags.noVision && <_InnerShadowOverlay x={x} y={y} width={width} height={height} />}
         {flags.nonStandard && (
@@ -256,6 +250,91 @@ function _renderBar(props, { hoveredModel, radius = [4, 4, 0, 0], colorOverride,
       fill={color} radius={radius} opacity={opacity}
       style={transitionStyle}
     />
+  )
+}
+
+/**
+ * @brief v2(관대 채점) 추가 점수 막대 렌더링
+ *
+ * v1 막대 위에 쌓이며, 막대 끝은 v2 총점 위치를 그대로 유지하고 v1과 맞닿는
+ * 쪽만 줄여 두 구간을 구분한다.
+ *
+ * @param {Object} props - Recharts shape props
+ * @param {Object} options - { hoveredModel, darkMode, isMobile }
+ * @return {JSX.Element} SVG 요소
+ */
+function _renderLenientDeltaBar(props, { hoveredModel, darkMode, isMobile }) {
+  const { x, y, width, height, payload } = props
+  if (!(payload?.lenientDelta > 0)) return <g />
+
+  const isHovered = hoveredModel === payload.model
+  const hasHover = hoveredModel !== null
+  const opacity = hasHover ? (isHovered ? 1 : 0.3) : 1
+  const fill = darkMode ? LENIENT_DELTA_COLOR.dark : LENIENT_DELTA_COLOR.light
+
+  // 막대가 얇을 때는 간격을 줄여 v2 구간이 사라지지 않게 한다
+  const thickness = isMobile ? width : height
+  const gap = Math.min(LENIENT_SEGMENT_GAP, thickness / 3)
+  const drawn = Math.max(thickness - gap, Math.min(thickness, LENIENT_SEGMENT_MIN_THICKNESS))
+
+  const segment = isMobile
+    ? { x: x + (width - drawn), y, width: drawn, height, radius: [0, 4, 4, 0] }
+    : { x, y, width, height: drawn, radius: [4, 4, 0, 0] }
+
+  if (segment.width <= 0 || segment.height <= 0) return <g />
+
+  return (
+    <Rectangle
+      {...segment}
+      fill={fill}
+      opacity={opacity}
+      style={{ transition: 'opacity 0.15s ease-in-out' }}
+    />
+  )
+}
+
+/**
+ * @brief 점수 레이블 렌더링 (v2가 다르면 "v1 → v2" 병행 표기)
+ * @param {Object} props - Recharts LabelList content props
+ * @param {Object} options - { rows, fill, fontSize }
+ * @return {JSX.Element|null}
+ */
+function _renderScoreLabel({ x, y, width, index }, { rows, fill, fontSize }) {
+  const row = rows[index]
+  if (!row) return null
+
+  const strictScore = row.score.toFixed(1)
+  const text = row.lenientDelta > 0
+    ? `${strictScore} → ${row.lenientScore.toFixed(1)}`
+    : strictScore
+
+  return (
+    <text
+      x={x + width / 2}
+      y={y - 6}
+      textAnchor="middle"
+      fontSize={fontSize}
+      fill={fill}
+      fontWeight={500}
+    >
+      {text}
+    </text>
+  )
+}
+
+/**
+ * @brief v2 추가 점수 막대 범례 (export 이미지에도 포함)
+ * @param {Object} props - { t, darkMode }
+ */
+function _LenientLegend({ t, darkMode }) {
+  return (
+    <div className="flex items-center gap-1.5 mb-3 text-xs text-gray-500 dark:text-gray-400">
+      <span
+        className="inline-block w-3 h-3 rounded-sm shrink-0"
+        style={{ backgroundColor: darkMode ? LENIENT_DELTA_COLOR.dark : LENIENT_DELTA_COLOR.light }}
+      />
+      <span>{t('charts.lenientLegend')}</span>
+    </div>
   )
 }
 
@@ -325,6 +404,7 @@ function CustomTooltip({ active, payload, t }) {
   if (!active || !payload?.length) return null
 
   const data = payload[0].payload
+  const hasLenientDelta = data.lenientDelta > 0
   const displayScore = Number.isInteger(data.score)
     ? data.score
     : parseFloat(data.score.toFixed(3))
@@ -338,6 +418,12 @@ function CustomTooltip({ active, payload, t }) {
       <p className="text-sm text-gray-600 dark:text-gray-400">
         {t('tooltip.score')}: <span className="font-medium">{displayScore}</span> / {data.totalPoints}{t('tooltip.points')}
       </p>
+      {hasLenientDelta && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {t('tooltip.lenientScore')}: <span className="font-medium">{data.lenientScore.toFixed(1)}</span> / {data.totalPoints}{t('tooltip.points')}
+          <span className="ml-1">(+{data.lenientDelta.toFixed(1)})</span>
+        </p>
+      )}
       <p className="text-sm text-gray-600 dark:text-gray-400">
         {t('tooltip.accuracy')}: <span className="font-medium">{accuracy}%</span>
       </p>
@@ -353,16 +439,14 @@ function CustomTooltip({ active, payload, t }) {
 /**
  * @brief 점수 막대 차트 컴포넌트
  * @param {Object} props - { data, maxScore, title, height, hoveredModel, onModelHover }
- * @param {Array} props.data - [{ model, score, totalPoints, correctCount?, totalQuestions? }]
- *                             bestWorst 모드: [{ model, best, worst }]
- *                             이미지 모드: [{ model, rate, score, maxScore }]
+ * @param {Array} props.data - [{ model, score, totalPoints, correctCount?, totalQuestions?,
+ *                                lenientScore?, lenientDelta? }] 점수 내림차순 정렬
  * @param {number} props.maxScore - 차트 Y축 최대값 (기본: 데이터에서 자동 계산)
  * @param {string} props.title - 차트 제목
  * @param {number} props.height - 차트 높이 (기본: 400)
  * @param {string} props.hoveredModel - 현재 호버된 모델명
  * @param {function} props.onModelHover - 모델 호버 콜백
- * @param {function} props.onViewModeChange - 보기 모드 변경 콜백
- * @param {boolean} props.showViewModeButtons - 보기 모드 버튼 표시 여부
+ * @param {string} props.exportKey - export 이미지 대상 키
  */
 export default function ScoreBarChart({
   data,
@@ -372,7 +456,8 @@ export default function ScoreBarChart({
   height = 400,
   hoveredModel,
   onModelHover,
-  modelMetadata = {}
+  modelMetadata = {},
+  exportKey = 'overview-score-chart'
 }) {
   const { t } = useTranslation()
   const { isDark: darkMode } = useTheme()
@@ -398,6 +483,11 @@ export default function ScoreBarChart({
   // 최대 점수 계산 (전달되지 않은 경우)
   const computedMaxScore = maxScore ?? Math.max(...data.map(d => d.totalPoints || d.score))
 
+  // 데스크톱 세로 막대는 높은 점수를 오른쪽에 두므로 렌더링 순서만 뒤집는다.
+  // 모바일 가로 막대는 높은 점수가 위에 오도록 전달된 순서를 유지한다.
+  const renderData = isMobile ? data : [...data].reverse()
+  const hasLenientDelta = data.some(item => item.lenientDelta > 0)
+
   // 다크모드용 색상
   const cursorColor = darkMode ? 'rgba(55, 65, 81, 0.5)' : '#f3f4f6'
   const axisColor = darkMode ? '#4b5563' : '#e5e7eb'
@@ -421,18 +511,19 @@ export default function ScoreBarChart({
           </div>
           <ExportButton
             onClick={() => exportImage(`${subtitle || t('common.all')}.png`)}
-            exportKey="overview-score-chart"
+            exportKey={exportKey}
           />
         </div>
+        {hasLenientDelta && <_LenientLegend t={t} darkMode={darkMode} />}
         <ResponsiveContainer width="100%" height={dynamicHeight}>
           <BarChart
-            key={data.map(d => d.model).join(',')}
-            data={data}
+            key={renderData.map(d => d.model).join(',')}
+            data={renderData}
             layout="vertical"
             margin={{ top: 10, right: 30, left: 5, bottom: 10 }}
             onMouseMove={(state) => {
               if (state?.activeTooltipIndex !== undefined) {
-                const model = data[state.activeTooltipIndex]?.model
+                const model = renderData[state.activeTooltipIndex]?.model
                 if (model && model !== hoveredModel) {
                   onModelHover?.(model)
                 }
@@ -465,8 +556,21 @@ export default function ScoreBarChart({
             <HatchPatternDefs darkMode={darkMode} />
             <Bar
               dataKey="score"
+              stackId="score"
               barSize={24}
-              shape={(props) => _renderBar(props, { hoveredModel, radius: [0, 4, 4, 0], modelMetadata })}
+              shape={(props) => _renderBar(props, {
+                hoveredModel,
+                radius: props.payload?.lenientDelta > 0 ? [0, 0, 0, 0] : [0, 4, 4, 0],
+                modelMetadata,
+                darkMode
+              })}
+            />
+            <Bar
+              dataKey="lenientDelta"
+              stackId="score"
+              barSize={24}
+              isAnimationActive={false}
+              shape={(props) => _renderLenientDeltaBar(props, { hoveredModel, darkMode, isMobile: true })}
             />
           </BarChart>
         </ResponsiveContainer>
@@ -500,7 +604,7 @@ export default function ScoreBarChart({
           <ExportWatermark />
           <ExportButton
             onClick={() => exportImage(`${subtitle || t('common.all')}.png`)}
-            exportKey="overview-score-chart"
+            exportKey={exportKey}
           />
         </div>
       </div>
@@ -517,14 +621,15 @@ export default function ScoreBarChart({
           {t('charts.showScores')}
         </button>
       </div>
+      {hasLenientDelta && <_LenientLegend t={t} darkMode={darkMode} />}
       <ResponsiveContainer width="100%" height={600}>
         <BarChart
-            key={data.map(d => d.model).join(',')}
-            data={data}
+            key={renderData.map(d => d.model).join(',')}
+            data={renderData}
             margin={desktopChartMargin}
             onMouseMove={(state) => {
               if (state?.activeTooltipIndex !== undefined) {
-                const model = data[state.activeTooltipIndex]?.model
+                const model = renderData[state.activeTooltipIndex]?.model
                 if (model && model !== hoveredModel) {
                   onModelHover?.(model)
                 }
@@ -559,15 +664,30 @@ export default function ScoreBarChart({
             <HatchPatternDefs darkMode={darkMode} />
             <Bar
               dataKey="score"
+              stackId="score"
               isAnimationActive={false}
-              shape={(props) => _renderBar(props, { hoveredModel, modelMetadata })}
+              shape={(props) => _renderBar(props, {
+                hoveredModel,
+                radius: props.payload?.lenientDelta > 0 ? [0, 0, 0, 0] : [4, 4, 0, 0],
+                modelMetadata,
+                darkMode
+              })}
+            />
+            <Bar
+              dataKey="lenientDelta"
+              stackId="score"
+              isAnimationActive={false}
+              shape={(props) => _renderLenientDeltaBar(props, { hoveredModel, darkMode, isMobile: false })}
             >
               {showLabels && (
                 <LabelList
-                  dataKey="score"
+                  dataKey="lenientDelta"
                   position="top"
-                  formatter={(v) => v.toFixed(1)}
-                  style={{ fontSize: labelFontSize, fill: xTickColor, fontWeight: 500 }}
+                  content={(props) => _renderScoreLabel(props, {
+                    rows: renderData,
+                    fill: xTickColor,
+                    fontSize: labelFontSize
+                  })}
                 />
               )}
             </Bar>

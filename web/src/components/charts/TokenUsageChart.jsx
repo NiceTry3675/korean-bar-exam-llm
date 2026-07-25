@@ -90,15 +90,12 @@ const LABEL_MODES = [
   { id: 'none', labelKey: 'token.hidden' }
 ]
 
-function TokenKnowledgeCutoffGlowDefs({ darkMode }) {
+function TokenBarPatternDefs({ darkMode }) {
   const checkerLight = darkMode ? 'rgba(255,255,255,0.20)' : 'rgba(255,255,255,0.24)'
   const checkerDark = darkMode ? 'rgba(0,0,0,0.16)' : 'rgba(0,0,0,0.08)'
 
   return (
     <defs>
-      <filter id="token-post-exam-cutoff-glow" x="-8%" y="-24%" width="116%" height="148%">
-        <feGaussianBlur stdDeviation="1.35" />
-      </filter>
       <pattern
         id="token-web-service-no-tools-checker"
         patternUnits="userSpaceOnUse"
@@ -118,24 +115,11 @@ function TokenBarShape(props) {
   const { x, y, width, height, fill, fillOpacity, payload, modelMetadata = {} } = props
   if (!Number.isFinite(x) || !Number.isFinite(y) || width <= 0 || height <= 0) return null
 
-  const color = fill || getModelColor(payload.model)
+  const color = fill || getModelColor(payload.model, props.darkMode)
   const flags = getModelFlags(payload.model, modelMetadata)
 
   return (
     <g>
-      {flags.postExamKnowledgeCutoff && (
-        <rect
-          x={x}
-          y={y}
-          width={width}
-          height={height}
-          fill="none"
-          stroke={color}
-          strokeWidth={1.5}
-          opacity={0.9}
-          filter="url(#token-post-exam-cutoff-glow)"
-        />
-      )}
       <rect
         x={x}
         y={y}
@@ -318,14 +302,21 @@ export default function TokenUsageChart({
         return { model, inputTokens, outputTokens, total, outputRatio }
       })
       .filter(entry => entry && entry.total > 0)
+      // 점수 차트와 동일하게 큰 값이 앞에 오도록 정렬한다
       .sort((a, b) => {
         if (labelMode === 'outputRatio') {
-          if (a.outputRatio !== b.outputRatio) return a.outputRatio - b.outputRatio
+          if (a.outputRatio !== b.outputRatio) return b.outputRatio - a.outputRatio
         }
-        if (a.total !== b.total) return a.total - b.total
+        if (a.total !== b.total) return b.total - a.total
         return a.model.localeCompare(b.model)
       })
   }, [data, models, subjectFilter, labelMode])
+
+  // 모바일 가로 막대는 큰 값이 위에, 데스크톱 세로 막대는 큰 값이 오른쪽에 온다
+  const renderData = useMemo(
+    () => (isMobile ? chartData : [...chartData].reverse()),
+    [chartData, isMobile]
+  )
 
   // Y축 최대값 및 틱 계산
   const maxTotal = chartData.length ? Math.max(...chartData.map(d => d.total)) : 0
@@ -342,11 +333,11 @@ export default function TokenUsageChart({
 
   // 레이블 렌더러 메모이제이션
   const renderLabel = useCallback((props) => (
-    <CustomLabel {...props} mode={labelMode} chartData={chartData} darkMode={darkMode} />
-  ), [labelMode, chartData, darkMode])
+    <CustomLabel {...props} mode={labelMode} chartData={renderData} darkMode={darkMode} />
+  ), [labelMode, renderData, darkMode])
   const renderMobileLabel = useCallback((props) => (
-    <CustomMobileLabel {...props} mode={labelMode} chartData={chartData} darkMode={darkMode} />
-  ), [labelMode, chartData, darkMode])
+    <CustomMobileLabel {...props} mode={labelMode} chartData={renderData} darkMode={darkMode} />
+  ), [labelMode, renderData, darkMode])
   const renderTokenBarShape = useCallback((props) => (
     <TokenBarShape {...props} modelMetadata={modelMetadata} darkMode={darkMode} />
   ), [modelMetadata, darkMode])
@@ -387,7 +378,7 @@ export default function TokenUsageChart({
         {renderLabelModeButtons()}
         <ResponsiveContainer width="100%" height={mobileHeight}>
           <BarChart
-            data={chartData}
+            data={renderData}
             layout="vertical"
             margin={{ top: 10, right: 50, left: 5, bottom: 10 }}
           >
@@ -426,7 +417,7 @@ export default function TokenUsageChart({
               strokeDasharray="3 3"
             />
             <Tooltip content={<CustomTooltip t={t} />} cursor={{ fill: cursorColor }} />
-            <TokenKnowledgeCutoffGlowDefs darkMode={darkMode} />
+            <TokenBarPatternDefs darkMode={darkMode} />
             {/* 출력 토큰 (좌측, 진한 색) */}
             <Bar
               dataKey="outputTokens"
@@ -436,10 +427,10 @@ export default function TokenUsageChart({
               barSize={20}
               shape={renderTokenBarShape}
             >
-              {chartData.map((entry, index) => (
+              {renderData.map((entry, index) => (
                 <Cell
                   key={`output-${index}`}
-                  fill={getModelColor(entry.model)}
+                  fill={getModelColor(entry.model, darkMode)}
                   fillOpacity={0.9}
                 />
               ))}
@@ -453,10 +444,10 @@ export default function TokenUsageChart({
               barSize={20}
               shape={renderTokenBarShape}
             >
-              {chartData.map((entry, index) => (
+              {renderData.map((entry, index) => (
                 <Cell
                   key={`input-${index}`}
-                  fill={getModelColor(entry.model)}
+                  fill={getModelColor(entry.model, darkMode)}
                   fillOpacity={0.5}
                 />
               ))}
@@ -468,7 +459,7 @@ export default function TokenUsageChart({
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <BenchmarkNote modelNames={chartData.map(entry => entry.model)} modelMetadata={modelMetadata} />
+        <BenchmarkNote modelNames={renderData.map(entry => entry.model)} modelMetadata={modelMetadata} />
       </div>
     )
   }
@@ -491,7 +482,7 @@ export default function TokenUsageChart({
       {renderLabelModeButtons()}
       <ResponsiveContainer width="100%" height={height}>
         <BarChart
-          data={chartData}
+          data={renderData}
           margin={{ top: 30, right: 30, left: 20, bottom: 100 }}
         >
           <XAxis
@@ -520,7 +511,7 @@ export default function TokenUsageChart({
             strokeDasharray="3 3"
           />
           <Tooltip content={<CustomTooltip t={t} />} cursor={{ fill: cursorColor }} />
-          <TokenKnowledgeCutoffGlowDefs darkMode={darkMode} />
+          <TokenBarPatternDefs darkMode={darkMode} />
           {/* 출력 토큰 (하단, 진한 색) */}
           <Bar
             dataKey="outputTokens"
@@ -529,10 +520,10 @@ export default function TokenUsageChart({
             isAnimationActive={false}
             shape={renderTokenBarShape}
           >
-            {chartData.map((entry, index) => (
+            {renderData.map((entry, index) => (
               <Cell
                 key={`output-${index}`}
-                fill={getModelColor(entry.model)}
+                fill={getModelColor(entry.model, darkMode)}
                 fillOpacity={0.9}
               />
             ))}
@@ -545,10 +536,10 @@ export default function TokenUsageChart({
             isAnimationActive={false}
             shape={renderTokenBarShape}
           >
-            {chartData.map((entry, index) => (
+            {renderData.map((entry, index) => (
               <Cell
                 key={`input-${index}`}
-                fill={getModelColor(entry.model)}
+                fill={getModelColor(entry.model, darkMode)}
                 fillOpacity={0.5}
               />
             ))}
@@ -560,7 +551,7 @@ export default function TokenUsageChart({
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <BenchmarkNote modelNames={chartData.map(entry => entry.model)} modelMetadata={modelMetadata} />
+      <BenchmarkNote modelNames={renderData.map(entry => entry.model)} modelMetadata={modelMetadata} />
     </div>
   )
 }

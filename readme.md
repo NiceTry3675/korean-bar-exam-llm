@@ -31,7 +31,9 @@
 
 ## 종합 성적
 
-![전체 점수 비교](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체.png)
+| 고추론 (max·high) | 저추론 (none·low) |
+|---|---|
+| ![전체 점수 비교 - 고추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_고추론.png) | ![전체 점수 비교 - 저추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_저추론.png) |
 
 | 모델 | 공법 | 민사법 | 형사법 | 총점 | 응답 | API 환산 비용 | 출력 토큰 |
 |---|---|---|---|---|---|---|---|
@@ -70,8 +72,10 @@
 
 ### 과목별
 
-| ![공법](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법.png) | ![민사법](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법.png) | ![형사법](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법.png) |
-|---|---|---|
+| | 공법 | 민사법 | 형사법 |
+|---|---|---|---|
+| 고추론 | ![공법 고추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_고추론.png) | ![민사법 고추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_고추론.png) | ![형사법 고추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_고추론.png) |
+| 저추론 | ![공법 저추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_저추론.png) | ![민사법 저추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_저추론.png) | ![형사법 저추론](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_저추론.png) |
 
 ---
 

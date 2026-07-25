@@ -23,6 +23,20 @@ function _getCorrectCount(record) {
   return (record?.results || []).filter(result => result.is_correct === true).length
 }
 
+/**
+ * @brief 관대 채점(v2) 값을 안전하게 읽는다.
+ *
+ * 공개 JSON에 v2 필드가 없으면 엄격 채점(v1) 값으로 대체해, 파이프라인이
+ * 갱신되지 않은 데이터에서도 v1과 동일하게 동작하도록 한다.
+ *
+ * @param {*} lenientValue - 레코드의 v2 값
+ * @param {number} strictValue - 대체할 v1 값
+ * @return {number}
+ */
+function _getLenientValue(lenientValue, strictValue) {
+  return Number.isFinite(Number(lenientValue)) ? Number(lenientValue) : strictValue
+}
+
 /** @brief 결과 레코드에서 전체 문항 수를 안전하게 계산 */
 function _getQuestionCount(record, section) {
   if (Number.isFinite(Number(record?.total_questions))) {
@@ -61,16 +75,22 @@ export function calculateBenchmarkScore(data, modelName, benchmark, subjectFilte
       subject: section.subject,
       section: section.section,
       score,
+      scoreLenient: _getLenientValue(record?.score_lenient, score),
       maxScore,
       correctCount,
+      correctCountLenient: _getLenientValue(record?.correct_count_lenient, correctCount),
       totalQuestions,
       accuracy: totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0
     }
   })
 
   const total = sectionScores.reduce((sum, section) => sum + section.score, 0)
+  const totalLenient = sectionScores.reduce((sum, section) => sum + section.scoreLenient, 0)
   const maxScore = sectionScores.reduce((sum, section) => sum + section.maxScore, 0)
   const correctCount = sectionScores.reduce((sum, section) => sum + section.correctCount, 0)
+  const correctCountLenient = sectionScores.reduce(
+    (sum, section) => sum + section.correctCountLenient, 0
+  )
   const totalQuestions = sectionScores.reduce((sum, section) => sum + section.totalQuestions, 0)
   const normalizedScores = Object.fromEntries(sectionScores.map(section => [
     section.key,
@@ -80,8 +100,10 @@ export function calculateBenchmarkScore(data, modelName, benchmark, subjectFilte
   return {
     model: modelName,
     total,
+    totalLenient,
     maxScore,
     correctCount,
+    correctCountLenient,
     totalQuestions,
     accuracy: totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0,
     sectionScores,

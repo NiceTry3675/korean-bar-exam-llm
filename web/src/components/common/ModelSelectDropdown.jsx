@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { groupModelsByVendor, getSortedVendors, getModelColor } from '@/utils/colorUtils'
 import { formatModelDisplayName } from '@/utils/modelMeta'
+import { useTheme } from '@/hooks/useTheme'
 
 /**
  * @brief 모델 선택 드롭다운 컴포넌트
@@ -19,6 +20,7 @@ export default function ModelSelectDropdown({
   maxSelect = 5
 }) {
   const { t } = useTranslation()
+  const { isDark: darkMode } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -144,7 +146,7 @@ export default function ModelSelectDropdown({
             >
               <span
                 className="w-2 h-2 rounded-full"
-                style={{ backgroundColor: getModelColor(model) }}
+                style={{ backgroundColor: getModelColor(model, darkMode) }}
               />
               <span className="truncate max-w-[120px]">{formatModelDisplayName(model)}</span>
               <button

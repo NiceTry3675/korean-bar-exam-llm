@@ -34,7 +34,9 @@ reasoning budget, and what that costs.
 
 ## Overall Results
 
-![Overall score comparison](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체.png)
+| High reasoning (max·high) | Low reasoning (none·low) |
+|---|---|
+| ![Overall score comparison - high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_고추론.png) | ![Overall score comparison - low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_저추론.png) |
 
 | Model | Public Law | Civil Law | Criminal Law | Total | Answered | API-equivalent cost | Output tokens |
 |---|---|---|---|---|---|---|---|
@@ -73,8 +75,10 @@ reasoning budget, and what that costs.
 
 ### By subject
 
-| ![Public Law](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법.png) | ![Civil Law](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법.png) | ![Criminal Law](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법.png) |
-|---|---|---|
+| | Public Law | Civil Law | Criminal Law |
+|---|---|---|---|
+| High reasoning | ![Public Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_고추론.png) | ![Civil Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_고추론.png) | ![Criminal Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_고추론.png) |
+| Low reasoning | ![Public Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_저추론.png) | ![Civil Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_저추론.png) | ![Criminal Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_저추론.png) |
 
 ---
 

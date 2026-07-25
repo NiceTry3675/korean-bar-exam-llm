@@ -938,6 +938,86 @@ class SyncManager:
             'cost_usd': section_data.get('cost_usd'),
         }
 
+    def _get_verified_json_file(self, sheet_name: str) -> Optional[Path]:
+        """
+        @brief 시트에 대응하는 검증 결과 JSON 경로를 반환한다.
+
+        @param sheet_name 대상 시트
+        @return results_verified.json 경로 또는 매핑이 없으면 None
+        """
+        json_dir = self.path_mapper.sheet_to_json_path(sheet_name)
+        if not json_dir:
+            return None
+        return json_dir / self.verified_filename
+
+    def _load_lenient_export_data(self, sheet_name: str) -> Dict[str, Dict]:
+        """
+        @brief 검증 결과 JSON에서 관대 채점(v2) 정보를 읽어온다.
+
+        공식 점수는 엄격 파서(v1)만 사용하므로 v2 값은 대시보드 병행 표기용
+        부가 필드로만 내보낸다. 검증 결과 파일은 저작권상 저장소에 포함되지
+        않으므로 파일이 없거나 손상된 경우 조용히 빈 값을 반환한다.
+
+        @param sheet_name 대상 시트
+        @return {모델명: {'score_lenient': float, 'correct_count_lenient': int,
+                          'questions': {문항번호: {...}}}}
+        """
+        verified_file = self._get_verified_json_file(sheet_name)
+        if not verified_file or not verified_file.exists():
+            return {}
+
+        try:
+            with open(verified_file, 'r', encoding='utf-8') as file:
+                json_data = json.load(file)
+        except (OSError, json.JSONDecodeError) as error:
+            print(f"경고: {sheet_name} 관대 채점 정보 로드 실패 - {error}")
+            return {}
+
+        if not isinstance(json_data, dict):
+            return {}
+
+        lenient_scores = json_data.get('model_scores_lenient')
+        if not isinstance(lenient_scores, dict):
+            lenient_scores = {}
+        model_metrics = json_data.get('model_metrics')
+        if not isinstance(model_metrics, dict):
+            model_metrics = {}
+
+        lenient_data: Dict[str, Dict] = {}
+        for model_name, metrics in model_metrics.items():
+            if not isinstance(metrics, dict):
+                continue
+            score = lenient_scores.get(model_name, metrics.get('lenient_score'))
+            entry: Dict = {'questions': {}}
+            if score is not None:
+                entry['score_lenient'] = float(score)
+            correct_count = metrics.get('lenient_correct_count')
+            if correct_count is not None:
+                entry['correct_count_lenient'] = int(correct_count)
+            lenient_data[model_name] = entry
+
+        for row in json_data.get('results', []):
+            if not isinstance(row, dict):
+                continue
+            model_name = row.get('model_name')
+            question_number = row.get('question_number')
+            if model_name is None or question_number is None:
+                continue
+            # 관대 채점 필드가 아예 없는 행(구 스키마)은 비교 대상에서 제외한다
+            if not any(
+                key in row
+                for key in ('lenient_answer', 'lenient_status', 'lenient_is_correct')
+            ):
+                continue
+            entry = lenient_data.setdefault(model_name, {'questions': {}})
+            entry['questions'][question_number] = {
+                'lenient_answer': row.get('lenient_answer'),
+                'lenient_status': row.get('lenient_status'),
+                'lenient_is_correct': row.get('lenient_is_correct'),
+            }
+
+        return lenient_data
+
     def _merge_run_metadata(self, json_data: Dict, sheet_name: str) -> bool:
         """
         @brief 실행기의 토큰·비용 메타데이터를 대시보드용 파일에 병합한다.
@@ -1370,6 +1450,9 @@ class SyncManager:
             except (FileNotFoundError, ValueError):
                 continue
 
+            # 관대 채점(v2) 병행 표기용 부가 정보 (없으면 빈 dict)
+            lenient_data = self._load_lenient_export_data(sheet_name)
+
             try:
                 # 모델 목록 결정
                 if model_name:
@@ -1408,6 +1491,21 @@ class SyncManager:
                             }
                             for r in json_data['results']
                         ]
+                        # 관대 채점 결과가 엄격 채점과 다른 문항만 부가 표기
+                        lenient_entry = lenient_data.get(json_model_name, {})
+                        lenient_questions = lenient_entry.get('questions', {})
+                        for clean_row in clean_results:
+                            lenient_row = lenient_questions.get(
+                                clean_row['question_number']
+                            )
+                            if not lenient_row:
+                                continue
+                            differs = (
+                                lenient_row['lenient_is_correct'] != clean_row['is_correct']
+                                or lenient_row['lenient_answer'] != clean_row['extracted_answer']
+                            )
+                            if differs:
+                                clean_row.update(lenient_row)
                         clean_data = {
                             'benchmark_id': self.benchmark_id,
                             'run_mode': 'subject' if self.hard_mode else 'question',
@@ -1420,6 +1518,13 @@ class SyncManager:
                             'correct_count': json_data['correct_count'],
                             'total_questions': json_data['total_verified'],
                         }
+                        # 관대 채점(v2) 점수 병행 표기 (공식 점수는 score 유지)
+                        if 'score_lenient' in lenient_entry:
+                            clean_data['score_lenient'] = lenient_entry['score_lenient']
+                        if 'correct_count_lenient' in lenient_entry:
+                            clean_data['correct_count_lenient'] = (
+                                lenient_entry['correct_count_lenient']
+                            )
                         # 토큰 사용량 추가 (있는 경우에만)
                         token_usage = self._get_token_usage(json_model_name, sheet_name)
                         if token_usage:

@@ -164,7 +164,7 @@ export default function QuestionHeatmap({
                   className="w-36 p-2 text-xs truncate shrink-0 text-gray-800 dark:text-gray-200"
                   style={{
                     ...modelColumnStyle,
-                    borderLeft: `3px solid ${getModelColor(model)}`
+                    borderLeft: `3px solid ${getModelColor(model, darkMode)}`
                   }}
                   title={formatModelDisplayName(model)}
                 >

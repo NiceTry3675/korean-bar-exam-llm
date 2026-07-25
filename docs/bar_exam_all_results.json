@@ -10,6 +10,8 @@
     "total_points": 100.0,
     "correct_count": 38,
     "total_questions": 40,
+    "score_lenient": 95.0,
+    "correct_count_lenient": 38,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 60211,
@@ -394,6 +396,8 @@
     "total_points": 100.0,
     "correct_count": 39,
     "total_questions": 40,
+    "score_lenient": 97.5,
+    "correct_count_lenient": 39,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 313077,
@@ -778,6 +782,8 @@
     "total_points": 100.0,
     "correct_count": 33,
     "total_questions": 40,
+    "score_lenient": 82.5,
+    "correct_count_lenient": 33,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 20125,
@@ -931,7 +937,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 17,
@@ -1162,6 +1171,8 @@
     "total_points": 100.0,
     "correct_count": 34,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 40073,
       "output_tokens": 44247,
@@ -1261,7 +1272,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 11,
@@ -1546,6 +1560,8 @@
     "total_points": 100.0,
     "correct_count": 32,
     "total_questions": 40,
+    "score_lenient": 80.0,
+    "correct_count_lenient": 32,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 19221,
@@ -1708,7 +1724,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 18,
@@ -1930,6 +1949,8 @@
     "total_points": 100.0,
     "correct_count": 38,
     "total_questions": 40,
+    "score_lenient": 97.5,
+    "correct_count_lenient": 39,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 63237,
@@ -2029,7 +2050,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 11,
@@ -2314,6 +2338,8 @@
     "total_points": 100.0,
     "correct_count": 39,
     "total_questions": 40,
+    "score_lenient": 97.5,
+    "correct_count_lenient": 39,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 172544,
@@ -2698,6 +2724,8 @@
     "total_points": 100.0,
     "correct_count": 33,
     "total_questions": 40,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 21516,
@@ -2797,7 +2825,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 11,
@@ -2851,7 +2882,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 17,
@@ -2932,7 +2966,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 26,
@@ -3082,6 +3119,8 @@
     "total_points": 100.0,
     "correct_count": 28,
     "total_questions": 40,
+    "score_lenient": 82.5,
+    "correct_count_lenient": 33,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 84191,
@@ -3163,7 +3202,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 9,
@@ -3181,7 +3223,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 11,
@@ -3190,7 +3235,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 12,
@@ -3217,7 +3265,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 15,
@@ -3253,7 +3304,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 19,
@@ -3334,7 +3388,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 28,
@@ -3397,7 +3454,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 35,
@@ -3466,6 +3526,8 @@
     "total_points": 100.0,
     "correct_count": 32,
     "total_questions": 40,
+    "score_lenient": 80.0,
+    "correct_count_lenient": 32,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 1473775,
@@ -3850,6 +3912,8 @@
     "total_points": 100.0,
     "correct_count": 24,
     "total_questions": 40,
+    "score_lenient": 62.5,
+    "correct_count_lenient": 25,
     "token_usage": {
       "input_tokens": 40113,
       "output_tokens": 25204,
@@ -4003,7 +4067,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 17,
@@ -4093,7 +4160,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 27,
@@ -4234,6 +4304,8 @@
     "total_points": 100.0,
     "correct_count": 31,
     "total_questions": 40,
+    "score_lenient": 77.5,
+    "correct_count_lenient": 31,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 423978,
@@ -4618,6 +4690,8 @@
     "total_points": 100.0,
     "correct_count": 30,
     "total_questions": 40,
+    "score_lenient": 75.0,
+    "correct_count_lenient": 30,
     "token_usage": {
       "input_tokens": 21547,
       "output_tokens": 700587,
@@ -5002,6 +5076,8 @@
     "total_points": 100.0,
     "correct_count": 19,
     "total_questions": 40,
+    "score_lenient": 47.5,
+    "correct_count_lenient": 19,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 8750,
@@ -5386,6 +5462,8 @@
     "total_points": 100.0,
     "correct_count": 36,
     "total_questions": 40,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 114186,
@@ -5770,6 +5848,8 @@
     "total_points": 100.0,
     "correct_count": 34,
     "total_questions": 40,
+    "score_lenient": 85.0,
+    "correct_count_lenient": 34,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 269162,
@@ -6154,6 +6234,8 @@
     "total_points": 100.0,
     "correct_count": 27,
     "total_questions": 40,
+    "score_lenient": 67.5,
+    "correct_count_lenient": 27,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 8127,
@@ -6538,6 +6620,8 @@
     "total_points": 100.0,
     "correct_count": 28,
     "total_questions": 40,
+    "score_lenient": 70.0,
+    "correct_count_lenient": 28,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 115523,
@@ -6922,6 +7006,8 @@
     "total_points": 100.0,
     "correct_count": 30,
     "total_questions": 40,
+    "score_lenient": 75.0,
+    "correct_count_lenient": 30,
     "token_usage": {
       "input_tokens": 23448,
       "output_tokens": 614755,
@@ -7306,6 +7392,8 @@
     "total_points": 100.0,
     "correct_count": 27,
     "total_questions": 40,
+    "score_lenient": 67.5,
+    "correct_count_lenient": 27,
     "token_usage": {
       "input_tokens": 23997,
       "output_tokens": 8192,
@@ -7690,6 +7778,8 @@
     "total_points": 100.0,
     "correct_count": 35,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 167683,
@@ -8074,6 +8164,8 @@
     "total_points": 100.0,
     "correct_count": 35,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 44302,
@@ -8458,6 +8550,8 @@
     "total_points": 100.0,
     "correct_count": 24,
     "total_questions": 40,
+    "score_lenient": 60.0,
+    "correct_count_lenient": 24,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 194884,
@@ -8842,6 +8936,8 @@
     "total_points": 100.0,
     "correct_count": 22,
     "total_questions": 40,
+    "score_lenient": 55.0,
+    "correct_count_lenient": 22,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 35695,
@@ -9226,6 +9322,8 @@
     "total_points": 100.0,
     "correct_count": 37,
     "total_questions": 40,
+    "score_lenient": 92.5,
+    "correct_count_lenient": 37,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 167516,
@@ -9610,6 +9708,8 @@
     "total_points": 100.0,
     "correct_count": 35,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 22767,
       "output_tokens": 23128,
@@ -9994,6 +10094,8 @@
     "total_points": 175.0,
     "correct_count": 67,
     "total_questions": 70,
+    "score_lenient": 167.5,
+    "correct_count_lenient": 67,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 130942,
@@ -10648,6 +10750,8 @@
     "total_points": 175.0,
     "correct_count": 67,
     "total_questions": 70,
+    "score_lenient": 167.5,
+    "correct_count_lenient": 67,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 650595,
@@ -11302,6 +11406,8 @@
     "total_points": 175.0,
     "correct_count": 53,
     "total_questions": 70,
+    "score_lenient": 135.0,
+    "correct_count_lenient": 54,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 49222,
@@ -11905,7 +12011,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 67,
@@ -11956,6 +12065,8 @@
     "total_points": 175.0,
     "correct_count": 57,
     "total_questions": 70,
+    "score_lenient": 142.5,
+    "correct_count_lenient": 57,
     "token_usage": {
       "input_tokens": 61100,
       "output_tokens": 101171,
@@ -12610,6 +12721,8 @@
     "total_points": 175.0,
     "correct_count": 59,
     "total_questions": 70,
+    "score_lenient": 147.5,
+    "correct_count_lenient": 59,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 49473,
@@ -13264,6 +13377,8 @@
     "total_points": 175.0,
     "correct_count": 67,
     "total_questions": 70,
+    "score_lenient": 167.5,
+    "correct_count_lenient": 67,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 127782,
@@ -13918,6 +14033,8 @@
     "total_points": 175.0,
     "correct_count": 67,
     "total_questions": 70,
+    "score_lenient": 167.5,
+    "correct_count_lenient": 67,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 528116,
@@ -14572,6 +14689,8 @@
     "total_points": 175.0,
     "correct_count": 61,
     "total_questions": 70,
+    "score_lenient": 162.5,
+    "correct_count_lenient": 65,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 63414,
@@ -14806,7 +14925,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 26,
@@ -14842,7 +14964,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 30,
@@ -15022,7 +15147,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 50,
@@ -15103,7 +15231,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 59,
@@ -15226,6 +15357,8 @@
     "total_points": 175.0,
     "correct_count": 42,
     "total_questions": 70,
+    "score_lenient": 137.5,
+    "correct_count_lenient": 55,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 393713,
@@ -15244,7 +15377,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 2,
@@ -15298,7 +15434,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 8,
@@ -15316,7 +15455,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 10,
@@ -15361,7 +15503,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 15,
@@ -15442,7 +15587,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 24,
@@ -15460,7 +15608,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 26,
@@ -15496,7 +15647,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 30,
@@ -15505,7 +15659,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 31,
@@ -15523,7 +15680,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 33,
@@ -15532,7 +15692,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 34,
@@ -15568,7 +15731,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 38,
@@ -15586,7 +15752,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 40,
@@ -15649,7 +15818,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 47,
@@ -15667,7 +15839,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 49,
@@ -15694,7 +15869,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 52,
@@ -15748,7 +15926,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 58,
@@ -15820,7 +16001,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 66,
@@ -15880,6 +16064,8 @@
     "total_points": 175.0,
     "correct_count": 48,
     "total_questions": 70,
+    "score_lenient": 120.0,
+    "correct_count_lenient": 48,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 4440250,
@@ -16534,6 +16720,8 @@
     "total_points": 175.0,
     "correct_count": 47,
     "total_questions": 70,
+    "score_lenient": 120.0,
+    "correct_count_lenient": 48,
     "token_usage": {
       "input_tokens": 61170,
       "output_tokens": 67439,
@@ -16795,7 +16983,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 29,
@@ -17188,6 +17379,8 @@
     "total_points": 175.0,
     "correct_count": 40,
     "total_questions": 70,
+    "score_lenient": 100.0,
+    "correct_count_lenient": 40,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 1017649,
@@ -17842,6 +18035,8 @@
     "total_points": 175.0,
     "correct_count": 36,
     "total_questions": 70,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
     "token_usage": {
       "input_tokens": 29510,
       "output_tokens": 1489232,
@@ -18496,6 +18691,8 @@
     "total_points": 175.0,
     "correct_count": 33,
     "total_questions": 70,
+    "score_lenient": 82.5,
+    "correct_count_lenient": 33,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 16987,
@@ -19150,6 +19347,8 @@
     "total_points": 175.0,
     "correct_count": 55,
     "total_questions": 70,
+    "score_lenient": 137.5,
+    "correct_count_lenient": 55,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 274890,
@@ -19804,6 +20003,8 @@
     "total_points": 175.0,
     "correct_count": 58,
     "total_questions": 70,
+    "score_lenient": 145.0,
+    "correct_count_lenient": 58,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 732990,
@@ -20458,6 +20659,8 @@
     "total_points": 175.0,
     "correct_count": 46,
     "total_questions": 70,
+    "score_lenient": 115.0,
+    "correct_count_lenient": 46,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 19447,
@@ -21112,6 +21315,8 @@
     "total_points": 175.0,
     "correct_count": 37,
     "total_questions": 70,
+    "score_lenient": 92.5,
+    "correct_count_lenient": 37,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 279202,
@@ -21766,6 +21971,8 @@
     "total_points": 175.0,
     "correct_count": 39,
     "total_questions": 70,
+    "score_lenient": 97.5,
+    "correct_count_lenient": 39,
     "token_usage": {
       "input_tokens": 35573,
       "output_tokens": 1376158,
@@ -22420,6 +22627,8 @@
     "total_points": 175.0,
     "correct_count": 36,
     "total_questions": 70,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
     "token_usage": {
       "input_tokens": 36706,
       "output_tokens": 17609,
@@ -23074,6 +23283,8 @@
     "total_points": 175.0,
     "correct_count": 62,
     "total_questions": 70,
+    "score_lenient": 155.0,
+    "correct_count_lenient": 62,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 279609,
@@ -23728,6 +23939,8 @@
     "total_points": 175.0,
     "correct_count": 61,
     "total_questions": 70,
+    "score_lenient": 152.5,
+    "correct_count_lenient": 61,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 87130,
@@ -24382,6 +24595,8 @@
     "total_points": 175.0,
     "correct_count": 34,
     "total_questions": 70,
+    "score_lenient": 85.0,
+    "correct_count_lenient": 34,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 417362,
@@ -25036,6 +25251,8 @@
     "total_points": 175.0,
     "correct_count": 38,
     "total_questions": 70,
+    "score_lenient": 95.0,
+    "correct_count_lenient": 38,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 69279,
@@ -25690,6 +25907,8 @@
     "total_points": 175.0,
     "correct_count": 56,
     "total_questions": 70,
+    "score_lenient": 140.0,
+    "correct_count_lenient": 56,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 400095,
@@ -26344,6 +26563,8 @@
     "total_points": 175.0,
     "correct_count": 59,
     "total_questions": 70,
+    "score_lenient": 147.5,
+    "correct_count_lenient": 59,
     "token_usage": {
       "input_tokens": 34479,
       "output_tokens": 59707,
@@ -26998,6 +27219,8 @@
     "total_points": 100.0,
     "correct_count": 37,
     "total_questions": 40,
+    "score_lenient": 92.5,
+    "correct_count_lenient": 37,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 86834,
@@ -27382,6 +27605,8 @@
     "total_points": 100.0,
     "correct_count": 39,
     "total_questions": 40,
+    "score_lenient": 97.5,
+    "correct_count_lenient": 39,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 430807,
@@ -27766,6 +27991,8 @@
     "total_points": 100.0,
     "correct_count": 31,
     "total_questions": 40,
+    "score_lenient": 80.0,
+    "correct_count_lenient": 32,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 29244,
@@ -28090,7 +28317,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 36,
@@ -28150,6 +28380,8 @@
     "total_points": 100.0,
     "correct_count": 29,
     "total_questions": 40,
+    "score_lenient": 85.0,
+    "correct_count_lenient": 34,
     "token_usage": {
       "input_tokens": 39723,
       "output_tokens": 48357,
@@ -28213,7 +28445,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 7,
@@ -28240,7 +28475,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 10,
@@ -28294,7 +28532,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 16,
@@ -28366,7 +28607,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 24,
@@ -28393,7 +28637,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 27,
@@ -28501,7 +28748,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 39,
@@ -28534,6 +28784,8 @@
     "total_points": 100.0,
     "correct_count": 28,
     "total_questions": 40,
+    "score_lenient": 70.0,
+    "correct_count_lenient": 28,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 29629,
@@ -28918,6 +29170,8 @@
     "total_points": 100.0,
     "correct_count": 35,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 100412,
@@ -29302,6 +29556,8 @@
     "total_points": 100.0,
     "correct_count": 37,
     "total_questions": 40,
+    "score_lenient": 92.5,
+    "correct_count_lenient": 37,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 240472,
@@ -29686,6 +29942,8 @@
     "total_points": 100.0,
     "correct_count": 29,
     "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 32601,
@@ -29731,7 +29989,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 5,
@@ -29794,7 +30055,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 12,
@@ -29830,7 +30094,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 16,
@@ -29875,7 +30142,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 21,
@@ -29911,7 +30181,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 1,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 25,
@@ -30037,7 +30310,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 39,
@@ -30070,6 +30346,8 @@
     "total_points": 100.0,
     "correct_count": 23,
     "total_questions": 40,
+    "score_lenient": 67.5,
+    "correct_count_lenient": 27,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 226834,
@@ -30115,7 +30393,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 5,
@@ -30133,7 +30414,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 7,
@@ -30142,7 +30426,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 8,
@@ -30232,7 +30519,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 18,
@@ -30250,7 +30540,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 20,
@@ -30286,7 +30579,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 2,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 24,
@@ -30295,7 +30591,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 25,
@@ -30454,6 +30753,8 @@
     "total_points": 100.0,
     "correct_count": 27,
     "total_questions": 40,
+    "score_lenient": 67.5,
+    "correct_count_lenient": 27,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 2318329,
@@ -30838,6 +31139,8 @@
     "total_points": 100.0,
     "correct_count": 24,
     "total_questions": 40,
+    "score_lenient": 62.5,
+    "correct_count_lenient": 25,
     "token_usage": {
       "input_tokens": 39763,
       "output_tokens": 38300,
@@ -31036,7 +31339,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 5,
+        "lenient_status": "answered",
+        "lenient_is_correct": true
       },
       {
         "question_number": 22,
@@ -31222,6 +31528,8 @@
     "total_points": 100.0,
     "correct_count": 26,
     "total_questions": 40,
+    "score_lenient": 65.0,
+    "correct_count_lenient": 26,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 606771,
@@ -31606,6 +31914,8 @@
     "total_points": 100.0,
     "correct_count": 23,
     "total_questions": 40,
+    "score_lenient": 57.5,
+    "correct_count_lenient": 23,
     "token_usage": {
       "input_tokens": 18602,
       "output_tokens": 950540,
@@ -31990,6 +32300,8 @@
     "total_points": 100.0,
     "correct_count": 17,
     "total_questions": 40,
+    "score_lenient": 42.5,
+    "correct_count_lenient": 17,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 11278,
@@ -32134,7 +32446,10 @@
         "is_correct": false,
         "points": 2.5,
         "answer_status": "parse_failed",
-        "provider_stop_reason": null
+        "provider_stop_reason": null,
+        "lenient_answer": 3,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 16,
@@ -32374,6 +32689,8 @@
     "total_points": 100.0,
     "correct_count": 32,
     "total_questions": 40,
+    "score_lenient": 80.0,
+    "correct_count_lenient": 32,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 170013,
@@ -32758,6 +33075,8 @@
     "total_points": 100.0,
     "correct_count": 31,
     "total_questions": 40,
+    "score_lenient": 77.5,
+    "correct_count_lenient": 31,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 506801,
@@ -33142,6 +33461,8 @@
     "total_points": 100.0,
     "correct_count": 32,
     "total_questions": 40,
+    "score_lenient": 80.0,
+    "correct_count_lenient": 32,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 12158,
@@ -33526,6 +33847,8 @@
     "total_points": 100.0,
     "correct_count": 27,
     "total_questions": 40,
+    "score_lenient": 67.5,
+    "correct_count_lenient": 27,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 157885,
@@ -33910,6 +34233,8 @@
     "total_points": 100.0,
     "correct_count": 26,
     "total_questions": 40,
+    "score_lenient": 65.0,
+    "correct_count_lenient": 26,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 785117,
@@ -34294,6 +34619,8 @@
     "total_points": 100.0,
     "correct_count": 29,
     "total_questions": 40,
+    "score_lenient": 72.5,
+    "correct_count_lenient": 29,
     "token_usage": {
       "input_tokens": 23762,
       "output_tokens": 10960,
@@ -34678,6 +35005,8 @@
     "total_points": 100.0,
     "correct_count": 38,
     "total_questions": 40,
+    "score_lenient": 95.0,
+    "correct_count_lenient": 38,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 198779,
@@ -35062,6 +35391,8 @@
     "total_points": 100.0,
     "correct_count": 36,
     "total_questions": 40,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 47270,
@@ -35446,6 +35777,8 @@
     "total_points": 100.0,
     "correct_count": 22,
     "total_questions": 40,
+    "score_lenient": 55.0,
+    "correct_count_lenient": 22,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 251477,
@@ -35830,6 +36163,8 @@
     "total_points": 100.0,
     "correct_count": 24,
     "total_questions": 40,
+    "score_lenient": 60.0,
+    "correct_count_lenient": 24,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 37018,
@@ -36214,6 +36549,8 @@
     "total_points": 100.0,
     "correct_count": 34,
     "total_questions": 40,
+    "score_lenient": 85.0,
+    "correct_count_lenient": 34,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 200121,
@@ -36598,6 +36935,8 @@
     "total_points": 100.0,
     "correct_count": 31,
     "total_questions": 40,
+    "score_lenient": 77.5,
+    "correct_count_lenient": 31,
     "token_usage": {
       "input_tokens": 22254,
       "output_tokens": 38238,

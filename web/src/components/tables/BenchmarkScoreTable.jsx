@@ -8,12 +8,27 @@ import { useTranslation } from 'react-i18next'
 import { getModelColor } from '@/utils/colorUtils'
 import { formatModelDisplayName } from '@/utils/modelMeta'
 import { translateSubject } from '@/utils/subjectLabels'
+import { useTheme } from '@/hooks/useTheme'
 import { useExportImage, README_EXPORT_WIDTH } from '@/hooks/useExportImage'
 import { BenchmarkNote, ExportButton, ExportWatermark } from '@/components/common'
 
 function _formatScore(value) {
   const number = Number(value) || 0
   return Number.isInteger(number) ? String(number) : number.toFixed(1)
+}
+
+/**
+ * @brief v2(관대 채점) 값이 공식 값과 다를 때만 보조 표기를 렌더링한다.
+ * @param {Object} props - { strict, lenient, children }
+ * @return {JSX.Element|null}
+ */
+function _LenientNote({ strict, lenient, children }) {
+  if (!Number.isFinite(Number(lenient)) || Number(lenient) === Number(strict)) return null
+  return (
+    <span className="block text-xs font-normal text-gray-500 dark:text-gray-400">
+      {children}
+    </span>
+  )
 }
 
 /**
@@ -29,6 +44,7 @@ export default function BenchmarkScoreTable({
   onModelHover
 }) {
   const { t } = useTranslation()
+  const { isDark: darkMode } = useTheme()
   const { ref, exportImage } = useExportImage({ exportWidth: README_EXPORT_WIDTH })
   const [sortConfig, setSortConfig] = useState({ key: 'total', direction: 'desc' })
   const sections = data?.[0]?.sectionScores || []
@@ -125,7 +141,7 @@ export default function BenchmarkScoreTable({
                 >
                   <td className="px-3 py-2 text-gray-800 dark:text-gray-200 whitespace-nowrap">
                     <span className="text-gray-400 mr-2">#{index + 1}</span>
-                    <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getModelColor(row.model) }} />
+                    <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getModelColor(row.model, darkMode) }} />
                     {formatModelDisplayName(row.model)}
                   </td>
                   {sections.map(section => {
@@ -133,15 +149,24 @@ export default function BenchmarkScoreTable({
                     return (
                       <td key={section.key} className="px-3 py-2 text-right text-gray-800 dark:text-gray-200">
                         {_formatScore(value?.score)}
+                        <_LenientNote strict={value?.score} lenient={value?.scoreLenient}>
+                          v2 {_formatScore(value?.scoreLenient)}
+                        </_LenientNote>
                       </td>
                     )
                   })}
                   <td className={`px-3 py-2 text-right font-bold ${row.total >= maxScore ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'}`}>
                     {_formatScore(row.total)}
+                    <_LenientNote strict={row.total} lenient={row.totalLenient}>
+                      v2 {_formatScore(row.totalLenient)}
+                    </_LenientNote>
                   </td>
                   <td className="px-3 py-2 text-right text-gray-800 dark:text-gray-200 whitespace-nowrap">
                     {row.correctCount}/{row.totalQuestions || totalQuestions}
                     <span className="block text-xs text-gray-500 dark:text-gray-400">{row.accuracy.toFixed(1)}%</span>
+                    <_LenientNote strict={row.correctCount} lenient={row.correctCountLenient}>
+                      v2 {row.correctCountLenient}/{row.totalQuestions || totalQuestions}
+                    </_LenientNote>
                   </td>
                 </tr>
               )

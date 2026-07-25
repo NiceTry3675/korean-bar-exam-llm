@@ -325,6 +325,146 @@ class SyncManagerTests(unittest.TestCase):
             public = next(item for item in exported if item['sheet_name'] == '공법')
             self.assertEqual(97.5, public['score'])
 
+    def test_lenient_scores_are_exported_as_side_fields(self):
+        """@brief v2 점수는 공식 점수를 건드리지 않고 부가 필드로만 노출된다."""
+        with tempfile.TemporaryDirectory() as temp_dir_name:
+            temp_dir = Path(temp_dir_name)
+            workbook_path = temp_dir / BAR_WORKBOOK.name
+            _copy_bar_template(workbook_path)
+
+            mapper = PathMapper(benchmark_id='bar-exam-15')
+            model_name = 'Fixture Model'
+            manager = SyncManager(
+                excel_path=workbook_path,
+                benchmark_id='bar-exam-15',
+            )
+            manager.token_usage_path = temp_dir / 'bar_exam_token_usage.json'
+            manager._token_usage = {'models': {}}
+
+            expected = {}
+            for sheet_name in ('공법', '민사법', '형사법'):
+                payload = self._result_payload(
+                    mapper, sheet_name, model_name=model_name, wrong_last=True
+                )
+                # 마지막 문항만 strict 파서가 못 읽고 lenient 파서가 정답을 복원한 상황
+                last = payload['results'][-1]
+                last['extracted_answer'] = None
+                last['answer_status'] = 'parse_failed'
+                last['is_correct'] = False
+                last['lenient_answer'] = last['correct_answer']
+                last['lenient_status'] = 'answered'
+                last['lenient_is_correct'] = True
+                strict_score = sum(
+                    row['points'] for row in payload['results'] if row['is_correct']
+                )
+                strict_correct = sum(1 for row in payload['results'] if row['is_correct'])
+                payload['model_scores'] = {model_name: strict_score}
+                payload['model_scores_lenient'] = {
+                    model_name: strict_score + last['points']
+                }
+                payload['model_metrics'] = {
+                    model_name: {
+                        'lenient_score': strict_score + last['points'],
+                        'lenient_correct_count': strict_correct + 1,
+                    }
+                }
+                expected[sheet_name] = {
+                    'score': strict_score,
+                    'score_lenient': strict_score + last['points'],
+                    'correct_count': strict_correct,
+                    'correct_count_lenient': strict_correct + 1,
+                    'last_question': last['question_number'],
+                    'lenient_answer': last['correct_answer'],
+                }
+                source_path = temp_dir / f'{sheet_name}.json'
+                source_path.write_text(
+                    json.dumps(payload, ensure_ascii=False), encoding='utf-8'
+                )
+                self.assertTrue(manager.import_from_json(source_path))
+            manager.excel_handler.save()
+
+            # 검증 결과 JSON을 임시 디렉터리에서 읽도록 대체한다
+            manager._get_verified_json_file = (
+                lambda sheet_name: temp_dir / f'{sheet_name}.json'
+            )
+
+            export_path = temp_dir / 'aggregate.json'
+            manager.export_all_sheets_to_json(export_path, all_models=True)
+            exported = json.loads(export_path.read_text(encoding='utf-8'))
+
+            self.assertEqual({model_name}, {item['model_name'] for item in exported})
+            for sheet_name, values in expected.items():
+                record = next(
+                    item for item in exported if item['sheet_name'] == sheet_name
+                )
+                # 공식 점수는 strict(v1) 그대로다
+                self.assertEqual(values['score'], record['score'])
+                self.assertEqual(values['correct_count'], record['correct_count'])
+                self.assertEqual(values['score_lenient'], record['score_lenient'])
+                self.assertEqual(
+                    values['correct_count_lenient'], record['correct_count_lenient']
+                )
+
+                # lenient 결과가 다른 문항에만 부가 필드가 붙는다
+                rows_with_lenient = [
+                    row for row in record['results'] if 'lenient_answer' in row
+                ]
+                self.assertEqual(1, len(rows_with_lenient))
+                self.assertEqual(
+                    values['last_question'], rows_with_lenient[0]['question_number']
+                )
+                self.assertEqual(
+                    values['lenient_answer'], rows_with_lenient[0]['lenient_answer']
+                )
+                self.assertTrue(rows_with_lenient[0]['lenient_is_correct'])
+
+    def test_lenient_export_tolerates_missing_verified_file(self):
+        """@brief 검증 결과 파일이 없어도 export는 v1 필드만으로 성공한다."""
+        with tempfile.TemporaryDirectory() as temp_dir_name:
+            temp_dir = Path(temp_dir_name)
+            workbook_path = temp_dir / BAR_WORKBOOK.name
+            _copy_bar_template(workbook_path)
+
+            mapper = PathMapper(benchmark_id='bar-exam-15')
+            model_name = 'Fixture Model'
+            manager = SyncManager(
+                excel_path=workbook_path,
+                benchmark_id='bar-exam-15',
+            )
+            manager.token_usage_path = temp_dir / 'bar_exam_token_usage.json'
+            manager._token_usage = {'models': {}}
+            manager._get_verified_json_file = (
+                lambda sheet_name: temp_dir / 'absent' / f'{sheet_name}.json'
+            )
+
+            for sheet_name in ('공법', '민사법', '형사법'):
+                payload = self._result_payload(
+                    mapper, sheet_name, model_name=model_name
+                )
+                answers = {
+                    row['question_number']: row['extracted_answer']
+                    for row in payload['results']
+                }
+                manager.excel_handler.add_model_column(
+                    sheet_name,
+                    model_name,
+                    answers,
+                    payload['model_scores'][model_name],
+                )
+            manager.excel_handler.save()
+
+            export_path = temp_dir / 'aggregate.json'
+            manager.export_all_sheets_to_json(export_path, all_models=True)
+            exported = json.loads(export_path.read_text(encoding='utf-8'))
+
+            self.assertEqual(3, len(exported))
+            for record in exported:
+                self.assertNotIn('score_lenient', record)
+                self.assertNotIn('correct_count_lenient', record)
+                self.assertTrue(all(
+                    'lenient_answer' not in row for row in record['results']
+                ))
+
     def test_parse_failed_round_trip_preserves_manual_review(self):
         """@brief 파싱 실패가 포기로 바뀌지 않고 검토 상태로 왕복된다."""
         with tempfile.TemporaryDirectory() as temp_dir_name:

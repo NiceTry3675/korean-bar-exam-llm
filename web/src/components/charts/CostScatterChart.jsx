@@ -19,7 +19,7 @@ import { getModelColor } from '@/utils/colorUtils'
 import { useTheme } from '@/hooks/useTheme'
 import { useExportImage, README_EXPORT_WIDTH } from '@/hooks/useExportImage'
 import { BenchmarkNote, ExportButton, ExportWatermark } from '@/components/common'
-import { formatModelDisplayName } from '@/utils/modelMeta'
+import { formatModelDisplayName, parseEffortSuffix } from '@/utils/modelMeta'
 
 const COST_POINT_RADIUS = 7
 const EXPORT_LABEL_GAP = 6
@@ -443,18 +443,48 @@ function getNiceRange(min, max, tickCount = 5) {
 }
 
 /**
+ * @brief 같은 모델의 추론 수준별 점을 잇기 위해 접미사를 제외한 이름으로 묶는다.
+ *
+ * @param {Array} points - 산점도 데이터
+ * @return {{ chains: Array<Array>, singles: Array }} 2개 이상인 그룹과 나머지
+ */
+function _groupByBaseModel(points) {
+  const groups = new Map()
+  points.forEach(point => {
+    const { base } = parseEffortSuffix(point.model)
+    if (!groups.has(base)) groups.set(base, [])
+    groups.get(base).push(point)
+  })
+
+  const chains = []
+  const singles = []
+  groups.forEach(group => {
+    if (group.length < 2) {
+      singles.push(...group)
+      return
+    }
+    // 비용 오름차순으로 이어야 선이 되돌아가지 않는다
+    chains.push([...group].sort((a, b) => a.totalCost - b.totalCost))
+  })
+
+  return { chains, singles }
+}
+
+/**
  * @brief 비용 vs 성능 산점도 차트 컴포넌트
  * @param {Object} props - { data, title, height, maxScore }
  * @param {Array} props.data - getCostData() 반환 형식
  * @param {string} props.title - 차트 제목
  * @param {number} props.height - 차트 높이 (기본: 800)
  * @param {number} props.maxScore - 만점 (0이면 데이터 최고점을 사용)
+ * @param {string} props.exportKey - export 이미지 대상 키
  */
 export default function CostScatterChart({
   data,
   title,
   height = 800,
-  maxScore = 0
+  maxScore = 0,
+  exportKey = 'cost-scatter'
 }) {
   const { t } = useTranslation()
   const { isDark: darkMode } = useTheme()
@@ -528,6 +558,38 @@ export default function CostScatterChart({
     xTicks.push(i)
   }
 
+  // 추론 수준별 연결선 그룹
+  const { chains, singles } = _groupByBaseModel(validData)
+
+  /** @brief 산점도 점 + 내보내기용 레이블 (모든 Scatter가 공유) */
+  const renderPointShape = ({ cx, cy, payload }) => (
+    <g>
+      <circle
+        cx={cx}
+        cy={cy}
+        r={7}
+        fill={getModelColor(payload.model, darkMode)}
+        stroke={darkMode ? '#ffffff' : '#000000'}
+        strokeWidth={0.6}
+      />
+      <text
+        x={cx}
+        y={cy - 16}
+        textAnchor="middle"
+        fill={darkMode ? '#d1d5db' : '#374151'}
+        fontSize={11}
+        fontWeight="500"
+        className="hidden"
+        data-export-show="true"
+        data-cost-scatter-label="true"
+        data-point-x={cx}
+        data-point-y={cy}
+      >
+        {formatModelDisplayName(payload.model)}
+      </text>
+    </g>
+  )
+
   return (
     <div ref={ref} className="w-full">
       <div className="flex items-start justify-between mb-4">
@@ -538,7 +600,7 @@ export default function CostScatterChart({
           <ExportWatermark />
           <ExportButton
             onClick={() => exportImage(`${t('export.costAnalysis')}.png`)}
-            exportKey="cost-scatter"
+            exportKey={exportKey}
           />
         </div>
       </div>
@@ -592,43 +654,42 @@ export default function CostScatterChart({
             stroke={referenceLineColor}
             strokeWidth={1}
           />
-          <Scatter
-            data={validData}
-            isAnimationActive={!isExporting}
-            shape={(props) => {
-              const { cx, cy, payload } = props
-              const label = formatModelDisplayName(payload.model)
-              return (
-                <g>
-                  <circle
-                    cx={cx}
-                    cy={cy}
-                    r={7}
-                    fill={getModelColor(payload.model)}
-                    stroke={darkMode ? '#ffffff' : '#000000'}
-                    strokeWidth={0.6}
-                  />
-                  <text
-                    x={cx}
-                    y={cy - 16}
-                    textAnchor="middle"
-                    fill={darkMode ? '#d1d5db' : '#374151'}
-                    fontSize={11}
-                    fontWeight="500"
-                    className="hidden"
-                    data-export-show="true"
-                    data-cost-scatter-label="true"
-                    data-point-x={cx}
-                    data-point-y={cy}
-                  >
-                    {label}
-                  </text>
-                </g>
-              )
-            }}
-          />
+          {/* 같은 모델의 추론 수준끼리 점선으로 연결 (선은 점 아래에 그려진다) */}
+          {chains.map(chain => (
+            <Scatter
+              key={`chain-${parseEffortSuffix(chain[0].model).base}`}
+              data={chain}
+              isAnimationActive={!isExporting}
+              line={{
+                stroke: getModelColor(chain[0].model, darkMode),
+                strokeWidth: 1.5,
+                strokeDasharray: '5 4',
+                strokeOpacity: darkMode ? 0.5 : 0.35
+              }}
+              lineType="joint"
+              shape={renderPointShape}
+            />
+          ))}
+          {singles.length > 0 && (
+            <Scatter
+              data={singles}
+              isAnimationActive={!isExporting}
+              shape={renderPointShape}
+            />
+          )}
         </ScatterChart>
       </ResponsiveContainer>
+      <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <svg width="22" height="8" aria-hidden="true">
+          <line
+            x1="0" y1="4" x2="22" y2="4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="5 4"
+          />
+        </svg>
+        <span>{t('charts.effortChainLegend')}</span>
+      </div>
       <BenchmarkNote modelNames={validData.map(item => item.model)} />
     </div>
   )

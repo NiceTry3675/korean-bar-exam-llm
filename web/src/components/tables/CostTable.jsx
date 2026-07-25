@@ -6,6 +6,7 @@
 import { useState, useMemo, useEffect, Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getModelColor, getShortModelName } from '@/utils/colorUtils'
+import { useTheme } from '@/hooks/useTheme'
 import { useExportImage, README_EXPORT_WIDTH } from '@/hooks/useExportImage'
 import { BenchmarkNote, ExportButton, ExportWatermark } from '@/components/common'
 import { formatModelDisplayName } from '@/utils/modelMeta'
@@ -37,6 +38,7 @@ export default function CostTable({ data, title }) {
     direction: 'desc'
   })
   const [showHiddenModels, setShowHiddenModels] = useState(false)
+  const { isDark: darkMode } = useTheme()
   const { ref, exportImage } = useExportImage({ exportWidth: README_EXPORT_WIDTH })
 
   // 모바일 감지
@@ -117,7 +119,7 @@ export default function CostTable({ data, title }) {
                     <div className="flex items-center justify-center gap-1">
                       <span
                         className="w-2 h-2 rounded-full shrink-0"
-                        style={{ backgroundColor: getModelColor(d.model) }}
+                        style={{ backgroundColor: getModelColor(d.model, darkMode) }}
                       />
                       <span className="truncate max-w-[80px]">{getShortModelName(d.model)}</span>
                     </div>
@@ -210,7 +212,7 @@ export default function CostTable({ data, title }) {
                 <td className="px-3 py-2 text-gray-800 dark:text-gray-200">
                   <span
                     className="inline-block w-3 h-3 rounded-full mr-2"
-                    style={{ backgroundColor: getModelColor(row.model) }}
+                    style={{ backgroundColor: getModelColor(row.model, darkMode) }}
                   />
                   {formatModelDisplayName(row.model)}
                 </td>
@@ -266,7 +268,7 @@ export default function CostTable({ data, title }) {
                     <td className="px-3 py-2 text-gray-800 dark:text-gray-200">
                       <span
                         className="inline-block w-3 h-3 rounded-full mr-2"
-                        style={{ backgroundColor: getModelColor(row.model) }}
+                        style={{ backgroundColor: getModelColor(row.model, darkMode) }}
                       />
                       {formatModelDisplayName(row.model)}
                     </td>

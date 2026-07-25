@@ -5,15 +5,19 @@
  * generate_charts.py의 ChartConfig 색상 체계를 JavaScript로 포팅
  */
 
-import { formatModelDisplayName } from './modelMeta'
+import { formatModelDisplayName, parseEffortSuffix } from './modelMeta.js'
 
 /**
  * @brief 브랜드별 색상 상수
+ *
+ * 개발사별 색상 램프의 중간 단계를 대표색으로 쓴다. OpenAI는 원래 빨간색이었으나
+ * Anthropic의 주황색과 색상이 인접해, 두 계열을 모두 어둡게 만들면 적록색약에서
+ * 구분되지 않았다. 실제 브랜드에 더 가까운 청록색으로 옮겨 분리도를 확보했다.
  */
 export const MODEL_COLORS = {
-  GPT: '#EA4335',       // OpenAI - 빨간색
-  Gemini: '#4285F4',    // Google - 파란색
-  Claude: '#D2691E',    // Anthropic - 주황색~갈색
+  GPT: '#0baa81',       // OpenAI - 청록색
+  Gemini: '#5177fa',    // Google - 파란색
+  Claude: '#bc5300',    // Anthropic - 주황색~갈색
   Mistral: '#FF6B35',   // Mistral AI - 주황색
   Grok: '#6A4C93',      // xAI - 보라색
   DeepSeek: '#1E3A8A',  // DeepSeek - 어두운 파란색
@@ -106,11 +110,81 @@ export const CHART_COLORS = {
 }
 
 /**
- * @brief 모델명으로 브랜드 색상 반환
+ * @brief 개발사별 모델 계열 색상 램프 (어두운 단계 → 밝은 단계)
+ *
+ * 같은 개발사 모델을 구분하기 위한 램프이며, 색상(hue)은 개발사마다 고정해
+ * 개발사 정체성을 유지한다. 다크 모드는 밝기를 자동으로 뒤집는 것이 아니라
+ * 어두운 배경에서 대비를 확보한 별도 단계를 사용한다.
+ *
+ * dataviz 검증기(all-pairs)로 명도 밴드·채도 하한·색약 분리도·대비를 확인한 값이다.
+ */
+const MODEL_FAMILY_RAMPS = {
+  light: {
+    anthropic: ['#943f00', '#bc5300', '#e56701', '#ff8946'],
+    openai: ['#028968', '#0baa81', '#00cc9b'],
+    google: ['#2e4aca', '#5177fa', '#8caafd']
+  },
+  dark: {
+    anthropic: ['#ae5600', '#cf6800', '#f07b01', '#fe9b55'],
+    openai: ['#0b9583', '#02b49e', '#0fd4bb'],
+    google: ['#2867e4', '#558ffe', '#91b7fe']
+  }
+}
+
+/**
+ * @brief 개발사별 모델 계열 순서 (램프 단계와 1:1 대응)
+ *
+ * 색은 점수 순위가 아니라 모델 계열에 고정된다. 필터로 표시 모델이 줄어도
+ * 남은 모델의 색이 바뀌지 않도록 이 순서는 데이터와 무관하게 선언한다.
+ * 점수가 비슷해 차트에서 나란히 놓이는 계열끼리 램프의 양 끝을 갖도록 배치했다.
+ * 목록에 없는 계열은 이름 해시로 램프 단계를 정한다.
+ */
+const MODEL_FAMILY_ORDER = {
+  anthropic: ['Claude Opus 5', 'Claude Opus 4.8', 'Claude Fable 5', 'Claude Sonnet 5'],
+  openai: ['GPT-5.6 Terra', 'GPT-5.6 Sol', 'GPT-5.6 Luna'],
+  google: ['Gemini 3.1 Pro Preview', 'Gemini 3.5 Flash-Lite', 'Gemini 3.6 Flash']
+}
+
+/**
+ * @brief 계열명을 램프 길이 안의 안정적인 인덱스로 바꾼다.
+ * @param {string} familyName - 추론 강도 접미사를 제거한 모델명
+ * @param {number} length - 램프 단계 수
+ * @return {number} 인덱스
+ */
+function _hashFamilyIndex(familyName, length) {
+  let hash = 0
+  for (let i = 0; i < familyName.length; i++) {
+    hash = (hash * 31 + familyName.charCodeAt(i)) % 1000003
+  }
+  return hash % length
+}
+
+/**
+ * @brief 모델명으로 색상 반환 (같은 개발사 안에서는 계열별로 다른 단계)
+ * @param {string} modelName - 모델명
+ * @param {boolean} darkMode - 다크 모드 여부
+ * @return {string} HEX 색상 코드
+ */
+export function getModelColor(modelName, darkMode = false) {
+  const vendor = getVendor(modelName)
+  const ramp = MODEL_FAMILY_RAMPS[darkMode ? 'dark' : 'light'][vendor.id]
+
+  if (ramp) {
+    const { base } = parseEffortSuffix(formatModelDisplayName(modelName))
+    const declared = MODEL_FAMILY_ORDER[vendor.id]?.indexOf(base) ?? -1
+    const index = declared >= 0 ? declared : _hashFamilyIndex(base, ramp.length)
+    return ramp[Math.min(index, ramp.length - 1)]
+  }
+
+  return _getVendorFallbackColor(modelName)
+}
+
+/**
+ * @brief 램프가 없는 개발사의 단일 브랜드 색상
  * @param {string} modelName - 모델명
  * @return {string} HEX 색상 코드
  */
-export function getModelColor(modelName) {
+function _getVendorFallbackColor(modelName) {
   const name = modelName.toLowerCase()
 
   if (name.includes('gpt') || /^o\d/.test(name)) {
@@ -164,8 +238,9 @@ export function getModelColor(modelName) {
  * 2. 'Preview, ' 제거
  * 3. K-EXAONE: '236B-A23B' 또는 '236B A23B' 삭제
  * 4. 괄호 처리:
- *    - 'Non-Thinking', 'low', 'minimal' → 괄호 전체 제거
+ *    - 'Non-Thinking', 'minimal' → 괄호 전체 제거
  *    - 'Thinking', 'XXK Thinking', 'high' → 💡로 대체
+ *    - 'low', 'max', 'none' → 추론 수준별 차트에서 구분이 필요하므로 그대로 유지
  *
  * @param {string} modelName - 원본 모델명
  * @return {string} 짧은 모델명
@@ -183,8 +258,8 @@ export function getShortModelName(modelName) {
   const parenMatch = name.match(/\(([^)]+)\)/)
   if (parenMatch) {
     const inner = parenMatch[1].toLowerCase()
-    if (inner.includes('non-thinking') || inner === 'low' || inner === 'minimal') {
-      // Non-Thinking, low, minimal → 괄호 전체 제거
+    if (inner.includes('non-thinking') || inner === 'minimal') {
+      // Non-Thinking, minimal → 괄호 전체 제거
       name = name.replace(/\s*\([^)]+\)/, '')
     } else if (inner.includes('thinking') || inner === 'high') {
       // Thinking, XXK Thinking, high → 💡
