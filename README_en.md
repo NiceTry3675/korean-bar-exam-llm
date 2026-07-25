@@ -23,9 +23,15 @@ Results of various LLMs solving the **multiple-choice section of the 15th Korean
 Examination** (Public Law 40 questions, Civil Law 70, Criminal Law 40 — 150 questions,
 375 points total, 2.5 points per question).
 
-Seven model families were run at **different reasoning efforts, for 26 combinations
+Ten models were run at **different reasoning efforts, for 27 combinations
 in total**. The goal is to show how much the same model's score moves with its
 reasoning budget, and what that costs.
+
+**Reasoning effort** is the thinking-budget setting passed with each API call: none
+disables reasoning, and low → high → max allow progressively more thinking tokens
+before the answer. In the charts below, **high-reasoning** groups the max·high runs and
+**low-reasoning** groups the none·low runs. Gemini uses a different budget scheme
+(thinking_level), so it was run at two levels, low and high.
 
 > This benchmark covers **only the multiple-choice section**, so it cannot be used to
 > determine whether a candidate would pass the examination.
@@ -161,6 +167,16 @@ parser (v2) that also recognizes prose phrasing are recorded **alongside** in th
 workbook. v2 is reference-only: it does not feed the official scores, the dashboard, or
 the table above.
 
+A real example — Sonnet 5 (high)'s response to Civil Law question 1 ends like this:
+
+> … Therefore the correct statements are **ㄱ, ㄴ, ㄷ**, and the answer is **③**.
+> (original Korean: "따라서 옳은 지문은 **ㄱ, ㄴ, ㄷ**이며, 정답은 **③**입니다.")
+
+The answer (③) is right, but the last line is not in the `정답: 3` format, so v1 marks
+it `parse_failed` (0 points) while v2 extracts ③ from the prose and counts it as
+correct. Sonnet 5 (high) had 31 such format violations, 22 of them with the right
+answer — which accounts for the entire +55.0 v1/v2 gap below (22 × 2.5).
+
 | Model | v1 (official) | v2 (reference) | Delta |
 |---|---|---|---|
 | Claude Sonnet 5 (high) | 232.5 | 287.5 | +55.0 |
@@ -170,14 +186,17 @@ the table above.
 | Claude Opus 4.8 (high) | 292.5 | 297.5 | +5.0 |
 | Claude Opus 5 (high) | 350.0 | 352.5 | +2.5 |
 
-The other 20 combinations score identically under v1 and v2. Format violations occurred
-**only in the Anthropic models**; the OpenAI and Google models had zero.
+The other 21 combinations score identically under v1 and v2. Format violations where
+the right answer was written in prose — **the kind v2 can recover** — occurred only in
+the Anthropic models. The OpenAI `parse_failed` cases (Luna none, 5 questions) yielded
+no extractable answer even under v2, or a wrong one, so they change no score; the
+Google models had zero format violations.
 
 ### When no answer was obtained
 
 | Type | Affected | Cause |
 |---|---|---|
-| `parse_failed` | Sonnet 5 (high) 31, Opus 5 (none) 13, Opus 4.8 (max) 7, Luna (none) 5, Sonnet 5 (none) 4, Opus 4.8 (high) 3, Opus 4.8 (none) 1, Opus 5 (high) 1 | Answered, but not in the required format (partly recovered under v2) |
+| `parse_failed` | Sonnet 5 (high) 31, Opus 5 (none) 13, Opus 4.8 (max) 7, Luna (none) 5, Sonnet 5 (none) 4, Opus 4.8 (high) 3, Opus 4.8 (none) 1, Opus 5 (high) 1, Fable 5 (low) 1 | Answered, but not in the required format (partly recovered under v2) |
 | `no_answer` | Sonnet 5 (max) 18 | Exhausted the 128K output limit without producing an answer |
 | `no_answer` | Luna (max) 25, Terra (max) 3 | No response received — ChatGPT Codex backend stream lifetime limit |
 
@@ -237,6 +256,16 @@ python3 benchmark_runner.py --benchmark bar-exam-15 \
 python3 sync_data.py --benchmark bar-exam-15 import --all
 python3 sync_data.py --benchmark bar-exam-15 export --all-sheets --all-models
 ```
+
+---
+
+## Requesting the Raw Model Responses
+
+The raw responses each model produced are not included in this repository — only the
+graded results and aggregates are published — because of their size and the copyright
+status of the quoted question text. If you need the raw responses for verification or
+research, please get in touch at
+[tomtom35177@gmail.com](mailto:tomtom35177@gmail.com).
 
 ---
 

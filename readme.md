@@ -22,8 +22,14 @@
 다양한 LLM이 **제15회 변호사시험 선택형**(공법 40문항, 민사법 70문항, 형사법 40문항 ·
 총 150문항 375점, 문항당 2.5점)을 푼 결과입니다.
 
-7개 모델 계열을 **추론 강도별로 나눠 26개 조합**을 실행했습니다. 같은 모델이라도
+10개 모델을 **추론 강도별로 나눠 27개 조합**을 실행했습니다. 같은 모델이라도
 추론 예산에 따라 점수가 얼마나 달라지는지, 그리고 그 대가로 얼마를 쓰는지를 함께 봅니다.
+
+**추론 강도**는 API 호출 때 지정하는 사고(thinking) 예산 설정입니다. none은 추론
+비활성이고, low → high → max 순으로 답을 내기 전에 쓸 수 있는 사고 토큰이
+늘어납니다. 아래 그래프의 **고추론**은 max·high, **저추론**은 none·low 실행을 묶은
+것입니다. Gemini는 예산 단계 체계(thinking_level)가 달라 low/high 두 수준으로
+실행했습니다.
 
 > 이 벤치마크는 변호사시험 중 **선택형만** 다루므로 합격 여부를 산출하는 용도로 쓸 수 없습니다.
 
@@ -154,6 +160,15 @@
 파서(v2) 결과를 워크북에 **병행 표기**합니다. v2는 참고용이며 공식 점수·대시보드·
 위 표에는 반영하지 않습니다.
 
+실제 사례 — Sonnet 5 (high)의 민사법 1번 응답은 이렇게 끝납니다.
+
+> … 따라서 옳은 지문은 **ㄱ, ㄴ, ㄷ**이며, 정답은 **③**입니다.
+
+정답(③)은 맞혔지만 마지막 줄이 `정답: 3` 형식이 아니므로 v1은 `parse_failed`
+(0점)로 처리하고, v2는 산문에서 ③을 추출해 정답으로 인정합니다. Sonnet 5 (high)는
+이런 형식 위반이 31건이었고 그중 22건이 정답이어서, 아래 표의 v1/v2 격차
++55.0점(= 22 × 2.5)이 전부 여기서 나왔습니다.
+
 | 모델 | v1 (공식) | v2 (참고) | 차이 |
 |---|---|---|---|
 | Claude Sonnet 5 (high) | 232.5 | 287.5 | +55.0 |
@@ -163,14 +178,16 @@
 | Claude Opus 4.8 (high) | 292.5 | 297.5 | +5.0 |
 | Claude Opus 5 (high) | 350.0 | 352.5 | +2.5 |
 
-나머지 20개 조합은 v1과 v2가 같습니다. 형식 미준수는 **Anthropic 계열에서만**
-발생했고, OpenAI·Google 계열은 0건이었습니다.
+나머지 21개 조합은 v1과 v2 점수가 같습니다. 정답을 산문으로 적어 **v2로 점수가
+복원되는 형식 위반은 Anthropic 계열에서만** 발생했습니다. OpenAI 쪽 `parse_failed`
+(Luna none 5건)는 v2로도 답을 추출하지 못했거나 추출해도 오답이라 점수 차이가
+없었고, Google 계열은 형식 위반 자체가 0건이었습니다.
 
 ### 응답을 얻지 못한 경우
 
 | 유형 | 대상 | 원인 |
 |---|---|---|
-| `parse_failed` | Sonnet 5 (high) 31, Opus 5 (none) 13, Opus 4.8 (max) 7, Luna (none) 5, Sonnet 5 (none) 4, Opus 4.8 (high) 3, Opus 4.8 (none) 1, Opus 5 (high) 1 | 답은 냈지만 지정 형식을 지키지 않음 (v2에서 일부 복원) |
+| `parse_failed` | Sonnet 5 (high) 31, Opus 5 (none) 13, Opus 4.8 (max) 7, Luna (none) 5, Sonnet 5 (none) 4, Opus 4.8 (high) 3, Opus 4.8 (none) 1, Opus 5 (high) 1, Fable 5 (low) 1 | 답은 냈지만 지정 형식을 지키지 않음 (v2에서 일부 복원) |
 | `no_answer` | Sonnet 5 (max) 18 | 128K 출력 한도를 모두 소진하고도 답 미도출 |
 | `no_answer` | Luna (max) 25, Terra (max) 3 | ChatGPT Codex 백엔드의 스트림 수명 한도로 응답 미수신 |
 
@@ -227,6 +244,14 @@ python3 benchmark_runner.py --benchmark bar-exam-15 \
 python3 sync_data.py --benchmark bar-exam-15 import --all
 python3 sync_data.py --benchmark bar-exam-15 export --all-sheets --all-models
 ```
+
+---
+
+## 모델 응답 원본 문의
+
+각 모델이 실제로 출력한 응답 원본은 용량과 저작권 문제로 저장소에 포함하지 않고,
+채점 결과와 집계값만 공개합니다. 검증이나 연구 목적으로 원본이 필요하시면
+[tomtom35177@gmail.com](mailto:tomtom35177@gmail.com)으로 문의해 주세요.
 
 ---
 
