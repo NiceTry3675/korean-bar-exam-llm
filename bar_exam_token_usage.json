@@ -7,7 +7,7 @@
           "output_tokens": 60211,
           "total_tokens": 100324,
           "question_count": 40,
-          "cost_usd": 3.4116800000000005
+          "cost_usd": 3.41168
         },
         "민사법": {
           "input_tokens": 61170,
@@ -35,7 +35,7 @@
       "total_tokens": 419033,
       "question_count": 150,
       "cost_usd": 15.309810000000002,
-      "last_updated": "2026-07-24T15:44:30Z"
+      "last_updated": "2026-07-25T06:27:40Z"
     },
     "Claude Fable 5 (max)": {
       "sections": {
@@ -125,7 +125,7 @@
           "output_tokens": 101171,
           "total_tokens": 162271,
           "question_count": 70,
-          "cost_usd": 2.834775
+          "cost_usd": 2.8347750000000005
         },
         "형사법": {
           "input_tokens": 39723,
@@ -145,8 +145,8 @@
       "total_output_tokens": 193775,
       "total_tokens": 334671,
       "question_count": 150,
-      "cost_usd": 5.548855,
-      "last_updated": "2026-07-24T15:49:42Z"
+      "cost_usd": 5.5488550000000005,
+      "last_updated": "2026-07-25T06:27:40Z"
     },
     "Claude Opus 4.8 (none)": {
       "sections": {
@@ -155,21 +155,21 @@
           "output_tokens": 19221,
           "total_tokens": 59334,
           "question_count": 40,
-          "cost_usd": 0.68109
+          "cost_usd": 0.6810900000000001
         },
         "민사법": {
           "input_tokens": 61170,
           "output_tokens": 49473,
           "total_tokens": 110643,
           "question_count": 70,
-          "cost_usd": 1.542675
+          "cost_usd": 1.5426749999999998
         },
         "형사법": {
           "input_tokens": 39763,
           "output_tokens": 29629,
           "total_tokens": 69392,
           "question_count": 40,
-          "cost_usd": 0.9395400000000002
+          "cost_usd": 0.93954
         }
       },
       "price": {
@@ -182,8 +182,8 @@
       "total_output_tokens": 98323,
       "total_tokens": 239369,
       "question_count": 150,
-      "cost_usd": 3.1633050000000003,
-      "last_updated": "2026-07-24T18:31:09Z"
+      "cost_usd": 3.163305,
+      "last_updated": "2026-07-25T06:27:43Z"
     },
     "Claude Opus 5 (high)": {
       "sections": {
@@ -192,21 +192,21 @@
           "output_tokens": 63237,
           "total_tokens": 103350,
           "question_count": 40,
-          "cost_usd": 1.7814899999999998
+          "cost_usd": 1.7814900000000002
         },
         "민사법": {
           "input_tokens": 61170,
           "output_tokens": 127782,
           "total_tokens": 188952,
           "question_count": 70,
-          "cost_usd": 3.5004
+          "cost_usd": 3.5003999999999995
         },
         "형사법": {
           "input_tokens": 39763,
           "output_tokens": 100412,
           "total_tokens": 140175,
           "question_count": 40,
-          "cost_usd": 2.709115
+          "cost_usd": 2.7091149999999997
         }
       },
       "price": {
@@ -220,7 +220,7 @@
       "total_tokens": 432477,
       "question_count": 150,
       "cost_usd": 7.9910049999999995,
-      "last_updated": "2026-07-25T00:44:39Z"
+      "last_updated": "2026-07-25T06:27:43Z"
     },
     "Claude Opus 5 (max)": {
       "sections": {
@@ -236,14 +236,14 @@
           "output_tokens": 528116,
           "total_tokens": 589286,
           "question_count": 70,
-          "cost_usd": 13.508750000000001
+          "cost_usd": 13.508750000000003
         },
         "형사법": {
           "input_tokens": 39763,
           "output_tokens": 240472,
           "total_tokens": 280235,
           "question_count": 40,
-          "cost_usd": 6.210615000000001
+          "cost_usd": 6.2106150000000016
         }
       },
       "price": {
@@ -256,8 +256,8 @@
       "total_output_tokens": 941132,
       "total_tokens": 1082178,
       "question_count": 150,
-      "cost_usd": 24.233530000000002,
-      "last_updated": "2026-07-25T00:37:01Z"
+      "cost_usd": 24.233530000000005,
+      "last_updated": "2026-07-25T06:27:43Z"
     },
     "Claude Opus 5 (none)": {
       "sections": {
@@ -266,21 +266,21 @@
           "output_tokens": 21516,
           "total_tokens": 61629,
           "question_count": 40,
-          "cost_usd": 0.738465
+          "cost_usd": 0.7384649999999999
         },
         "민사법": {
           "input_tokens": 61170,
           "output_tokens": 63414,
           "total_tokens": 124584,
           "question_count": 70,
-          "cost_usd": 1.8912000000000002
+          "cost_usd": 1.8911999999999995
         },
         "형사법": {
           "input_tokens": 39763,
           "output_tokens": 32601,
           "total_tokens": 72364,
           "question_count": 40,
-          "cost_usd": 1.01384
+          "cost_usd": 1.0138399999999999
         }
       },
       "price": {
@@ -293,8 +293,8 @@
       "total_output_tokens": 117531,
       "total_tokens": 258577,
       "question_count": 150,
-      "cost_usd": 3.643505,
-      "last_updated": "2026-07-25T00:46:43Z"
+      "cost_usd": 3.6435049999999993,
+      "last_updated": "2026-07-25T06:27:44Z"
     },
     "Claude Sonnet 5 (high)": {
       "sections": {
@@ -368,7 +368,7 @@
       "total_tokens": 8373400,
       "question_count": 150,
       "cost_usd": 123.908448,
-      "last_updated": "2026-07-24T18:27:38Z"
+      "last_updated": "2026-07-25T06:27:40Z"
     },
     "Claude Sonnet 5 (none)": {
       "sections": {
@@ -377,7 +377,7 @@
           "output_tokens": 25204,
           "total_tokens": 65317,
           "question_count": 40,
-          "cost_usd": 0.498399
+          "cost_usd": 0.49839900000000004
         },
         "민사법": {
           "input_tokens": 61170,
@@ -391,7 +391,7 @@
           "output_tokens": 38300,
           "total_tokens": 78063,
           "question_count": 40,
-          "cost_usd": 0.6937890000000002
+          "cost_usd": 0.6937889999999999
         }
       },
       "price": {
@@ -404,8 +404,8 @@
       "total_output_tokens": 130943,
       "total_tokens": 271989,
       "question_count": 150,
-      "cost_usd": 2.3872830000000005,
-      "last_updated": "2026-07-24T18:29:21Z"
+      "cost_usd": 2.387283,
+      "last_updated": "2026-07-25T06:27:43Z"
     },
     "GPT-5.6 Luna (high)": {
       "sections": {
@@ -479,7 +479,7 @@
       "total_tokens": 3210018,
       "question_count": 150,
       "cost_usd": 18.911813,
-      "last_updated": "2026-07-25T01:56:57Z"
+      "last_updated": "2026-07-25T06:27:40Z"
     },
     "GPT-5.6 Luna (none)": {
       "sections": {
@@ -495,14 +495,14 @@
           "output_tokens": 16987,
           "total_tokens": 53693,
           "question_count": 70,
-          "cost_usd": 0.138628
+          "cost_usd": 0.13862800000000003
         },
         "형사법": {
           "input_tokens": 23762,
           "output_tokens": 11278,
           "total_tokens": 35040,
           "question_count": 40,
-          "cost_usd": 0.09143
+          "cost_usd": 0.09143000000000001
         }
       },
       "price": {
@@ -516,7 +516,7 @@
       "total_tokens": 121480,
       "question_count": 150,
       "cost_usd": 0.306555,
-      "last_updated": "2026-07-24T21:31:52Z"
+      "last_updated": "2026-07-25T06:27:43Z"
     },
     "GPT-5.6 Sol (high)": {
       "sections": {
@@ -553,7 +553,7 @@
       "total_tokens": 643554,
       "question_count": 150,
       "cost_usd": 17.194995,
-      "last_updated": "2026-07-24T15:57:50Z"
+      "last_updated": "2026-07-25T06:27:40Z"
     },
     "GPT-5.6 Sol (max)": {
       "sections": {
@@ -606,7 +606,7 @@
           "output_tokens": 19447,
           "total_tokens": 56153,
           "question_count": 70,
-          "cost_usd": 0.7669400000000004
+          "cost_usd": 0.7669400000000003
         },
         "형사법": {
           "input_tokens": 23762,
@@ -626,8 +626,8 @@
       "total_output_tokens": 39732,
       "total_tokens": 124197,
       "question_count": 150,
-      "cost_usd": 1.6142850000000006,
-      "last_updated": "2026-07-24T21:29:24Z"
+      "cost_usd": 1.6142850000000004,
+      "last_updated": "2026-07-25T06:27:42Z"
     },
     "GPT-5.6 Terra (high)": {
       "sections": {
@@ -701,7 +701,7 @@
       "total_tokens": 2858813,
       "question_count": 150,
       "cost_usd": 41.8474075,
-      "last_updated": "2026-07-25T01:56:57Z"
+      "last_updated": "2026-07-25T06:27:41Z"
     },
     "GPT-5.6 Terra (none)": {
       "sections": {
@@ -717,14 +717,14 @@
           "output_tokens": 17609,
           "total_tokens": 54315,
           "question_count": 70,
-          "cost_usd": 0.3559000000000001
+          "cost_usd": 0.35590000000000005
         },
         "형사법": {
           "input_tokens": 23762,
           "output_tokens": 10960,
           "total_tokens": 34722,
           "question_count": 40,
-          "cost_usd": 0.22380500000000003
+          "cost_usd": 0.223805
         }
       },
       "price": {
@@ -737,8 +737,8 @@
       "total_output_tokens": 36761,
       "total_tokens": 121226,
       "question_count": 150,
-      "cost_usd": 0.7625775000000001,
-      "last_updated": "2026-07-24T21:30:16Z"
+      "cost_usd": 0.7625775,
+      "last_updated": "2026-07-25T06:27:42Z"
     },
     "Gemini 3.1 Pro Preview (high)": {
       "sections": {
@@ -775,7 +775,7 @@
       "total_tokens": 725571,
       "question_count": 150,
       "cost_usd": 7.911852,
-      "last_updated": "2026-07-24T17:31:32Z"
+      "last_updated": "2026-07-25T06:27:41Z"
     },
     "Gemini 3.1 Pro Preview (low)": {
       "sections": {
@@ -812,7 +812,7 @@
       "total_tokens": 258202,
       "question_count": 150,
       "cost_usd": 2.303424,
-      "last_updated": "2026-07-25T00:17:19Z"
+      "last_updated": "2026-07-25T06:27:42Z"
     },
     "Gemini 3.5 Flash-Lite (high)": {
       "sections": {
@@ -849,7 +849,7 @@
       "total_tokens": 943223,
       "question_count": 150,
       "cost_usd": 2.1831575000000005,
-      "last_updated": "2026-07-25T00:17:16Z"
+      "last_updated": "2026-07-25T06:27:42Z"
     },
     "Gemini 3.5 Flash-Lite (low)": {
       "sections": {
@@ -886,7 +886,7 @@
       "total_tokens": 221492,
       "question_count": 150,
       "cost_usd": 0.37883000000000006,
-      "last_updated": "2026-07-25T00:17:25Z"
+      "last_updated": "2026-07-25T06:27:42Z"
     },
     "Gemini 3.6 Flash (high)": {
       "sections": {
@@ -923,7 +923,7 @@
       "total_tokens": 847232,
       "question_count": 150,
       "cost_usd": 5.877240000000001,
-      "last_updated": "2026-07-25T00:17:13Z"
+      "last_updated": "2026-07-25T06:27:41Z"
     },
     "Gemini 3.6 Flash (low)": {
       "sections": {
@@ -960,7 +960,44 @@
       "total_tokens": 200573,
       "question_count": 150,
       "cost_usd": 1.0272975,
-      "last_updated": "2026-07-25T00:17:22Z"
+      "last_updated": "2026-07-25T06:27:42Z"
+    },
+    "Claude Fable 5 (low)": {
+      "sections": {
+        "공법": {
+          "input_tokens": 40113,
+          "output_tokens": 8742,
+          "total_tokens": 48855,
+          "question_count": 40,
+          "cost_usd": 0.8382299999999999
+        },
+        "민사법": {
+          "input_tokens": 61170,
+          "output_tokens": 25726,
+          "total_tokens": 86896,
+          "question_count": 70,
+          "cost_usd": 1.8980000000000001
+        },
+        "형사법": {
+          "input_tokens": 39763,
+          "output_tokens": 14092,
+          "total_tokens": 53855,
+          "question_count": 40,
+          "cost_usd": 1.10223
+        }
+      },
+      "price": {
+        "input": 10.0,
+        "output": 50.0
+      },
+      "provider": "anthropic-oauth",
+      "model_id": "claude-fable-5",
+      "total_input_tokens": 141046,
+      "total_output_tokens": 48560,
+      "total_tokens": 189606,
+      "question_count": 150,
+      "cost_usd": 3.83846,
+      "last_updated": "2026-07-25T09:45:31Z"
     }
   }
 }
