@@ -34,51 +34,94 @@ reasoning budget, and what that costs.
 
 ## Overall Results
 
-| High reasoning (max·high) | Low reasoning (none·low) |
-|---|---|
-| ![Overall score comparison - high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_고추론.png) | ![Overall score comparison - low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/전체_저추론.png) |
+**High reasoning (max·high)**
 
-| Model | Public Law | Civil Law | Criminal Law | Total | Answered | API-equivalent cost | Output tokens |
-|---|---|---|---|---|---|---|---|
-| Claude Fable 5 (max) | 97.5 | 167.5 | 97.5 | **362.5** | 150/150 | $71.13 | 1.39M |
-| Claude Opus 5 (max) | 97.5 | 167.5 | 92.5 | **357.5** | 150/150 | $24.23 | 941K |
-| Claude Fable 5 (high) | 95 | 167.5 | 92.5 | **355** | 150/150 | $15.31 | 278K |
-| Claude Opus 5 (high) | 95 | 167.5 | 87.5 | **350** | 149/150 | $7.99 | 291K |
-| Gemini 3.1 Pro Preview (high) | 87.5 | 155 | 95 | **337.5** | 150/150 | $7.91 | 646K |
-| Gemini 3.1 Pro Preview (low) | 87.5 | 152.5 | 90 | **330** | 150/150 | $2.30 | 179K |
-| Gemini 3.6 Flash (high) | 92.5 | 140 | 85 | **317.5** | 150/150 | $5.88 | 768K |
-| Gemini 3.6 Flash (low) | 87.5 | 147.5 | 77.5 | **312.5** | 150/150 | $1.03 | 121K |
-| Claude Opus 5 (none) | 82.5 | 152.5 | 72.5 | **307.5** | 137/150 | $3.64 | 118K |
-| GPT-5.6 Sol (high) | 90 | 137.5 | 80 | **307.5** | 150/150 | $17.19 | 559K |
-| GPT-5.6 Sol (max) | 85 | 145 | 77.5 | **307.5** | 150/150 | $45.69 | 1.51M |
-| Claude Opus 4.8 (max) | 85 | 142.5 | 72.5 | **300** | 143/150 | $5.55 | 194K |
-| Claude Opus 4.8 (none) | 80 | 147.5 | 70 | **297.5** | 149/150 | $3.16 | 98K |
-| Claude Opus 4.8 (high) | 82.5 | 132.5 | 77.5 | **292.5** | 147/150 | $3.17 | 99K |
-| Claude Sonnet 5 (max) | 80 | 120 | 67.5 | **267.5** | 132/150 | $123.91 | 8.23M |
-| GPT-5.6 Sol (none) | 67.5 | 115 | 80 | **262.5** | 150/150 | $1.61 | 40K |
-| GPT-5.6 Luna (high) | 77.5 | 100 | 65 | **242.5** | 150/150 | $12.37 | 2.05M |
-| Claude Sonnet 5 (none) | 60 | 117.5 | 60 | **237.5** | 146/150 | $2.39 | 131K |
-| GPT-5.6 Terra (max) | 75 | 97.5 | 65 | **237.5** | 147/150 | $41.85 | 2.78M |
-| Claude Sonnet 5 (high) | 70 | 105 | 57.5 | **232.5** | 119/150 | $10.99 | 705K |
-| GPT-5.6 Terra (high) | 70 | 92.5 | 67.5 | **230** | 150/150 | $8.50 | 553K |
-| GPT-5.6 Terra (none) | 67.5 | 90 | 72.5 | **230** | 150/150 | $0.76 | 37K |
-| GPT-5.6 Luna (max) | 75 | 90 | 57.5 | **222.5** | 125/150 | $18.91 | 3.14M |
-| Gemini 3.5 Flash-Lite (low) | 55 | 95 | 60 | **210** | 150/150 | $0.38 | 142K |
-| Gemini 3.5 Flash-Lite (high) | 60 | 85 | 55 | **200** | 150/150 | $2.18 | 864K |
-| GPT-5.6 Luna (none) | 47.5 | 82.5 | 42.5 | **172.5** | 145/150 | $0.31 | 37K |
+![Overall score comparison - high reasoning](docs/images/전체_고추론.png)
+
+**Low reasoning (none·low)**
+
+![Overall score comparison - low reasoning](docs/images/전체_저추론.png)
+
+| Model | Public Law | Civil Law | Criminal Law | Total | Score /100 | Answered | API-equivalent cost | Output tokens |
+|---|---|---|---|---|---|---|---|---|
+| Claude Fable 5 (max) | 97.5 | 167.5 | 97.5 | **362.5** | 96.7 | 150/150 | $71.13 | 1.39M |
+| Claude Opus 5 (max) | 97.5 | 167.5 | 92.5 | **357.5** | 95.3 | 150/150 | $24.23 | 941K |
+| Claude Fable 5 (high) | 95 | 167.5 | 92.5 | **355** | 94.7 | 150/150 | $15.31 | 278K |
+| Claude Opus 5 (high) | 95 | 167.5 | 87.5 | **350** | 93.3 | 149/150 | $7.99 | 291K |
+| Gemini 3.1 Pro Preview (high) | 87.5 | 155 | 95 | **337.5** | 90.0 | 150/150 | $7.91 | 646K |
+| Gemini 3.1 Pro Preview (low) | 87.5 | 152.5 | 90 | **330** | 88.0 | 150/150 | $2.30 | 179K |
+| Gemini 3.6 Flash (high) | 92.5 | 140 | 85 | **317.5** | 84.7 | 150/150 | $5.88 | 768K |
+| Gemini 3.6 Flash (low) | 87.5 | 147.5 | 77.5 | **312.5** | 83.3 | 150/150 | $1.03 | 121K |
+| Claude Opus 5 (none) | 82.5 | 152.5 | 72.5 | **307.5** | 82.0 | 137/150 | $3.64 | 118K |
+| GPT-5.6 Sol (high) | 90 | 137.5 | 80 | **307.5** | 82.0 | 150/150 | $17.19 | 559K |
+| GPT-5.6 Sol (max) | 85 | 145 | 77.5 | **307.5** | 82.0 | 150/150 | $45.69 | 1.51M |
+| Claude Opus 4.8 (max) | 85 | 142.5 | 72.5 | **300** | 80.0 | 143/150 | $5.55 | 194K |
+| Claude Opus 4.8 (none) | 80 | 147.5 | 70 | **297.5** | 79.3 | 149/150 | $3.16 | 98K |
+| Claude Opus 4.8 (high) | 82.5 | 132.5 | 77.5 | **292.5** | 78.0 | 147/150 | $3.17 | 99K |
+| Claude Sonnet 5 (max) | 80 | 120 | 67.5 | **267.5** | 71.3 | 132/150 | $123.91 | 8.23M |
+| GPT-5.6 Sol (none) | 67.5 | 115 | 80 | **262.5** | 70.0 | 150/150 | $1.61 | 40K |
+| GPT-5.6 Luna (high) | 77.5 | 100 | 65 | **242.5** | 64.7 | 150/150 | $12.37 | 2.05M |
+| Claude Sonnet 5 (none) | 60 | 117.5 | 60 | **237.5** | 63.3 | 146/150 | $2.39 | 131K |
+| GPT-5.6 Terra (max) | 75 | 97.5 | 65 | **237.5** | 63.3 | 147/150 | $41.85 | 2.78M |
+| Claude Sonnet 5 (high) | 70 | 105 | 57.5 | **232.5** | 62.0 | 119/150 | $10.99 | 705K |
+| GPT-5.6 Terra (high) | 70 | 92.5 | 67.5 | **230** | 61.3 | 150/150 | $8.50 | 553K |
+| GPT-5.6 Terra (none) | 67.5 | 90 | 72.5 | **230** | 61.3 | 150/150 | $0.76 | 37K |
+| GPT-5.6 Luna (max) | 75 | 90 | 57.5 | **222.5** | 59.3 | 125/150 | $18.91 | 3.14M |
+| Gemini 3.5 Flash-Lite (low) | 55 | 95 | 60 | **210** | 56.0 | 150/150 | $0.38 | 142K |
+| Gemini 3.5 Flash-Lite (high) | 60 | 85 | 55 | **200** | 53.3 | 150/150 | $2.18 | 864K |
+| GPT-5.6 Luna (none) | 47.5 | 82.5 | 42.5 | **172.5** | 46.0 | 145/150 | $0.31 | 37K |
 
 > **Answered** counts questions where an answer could be extracted. The rest score zero;
 > causes are broken down in [When no answer was obtained](#when-no-answer-was-obtained).
 >
 > **API-equivalent cost** is not a subscription bill. It applies public API list prices
 > to the measured token usage, so it differs from what was actually charged.
+>
+> **Score /100** rescales the total from 375 points to 100. Because every question is
+> worth the same 2.5 points, it equals the accuracy percentage.
+>
+> The dashed line in the charts marks **247.5 points**: the multiple-choice score that
+> corresponds to the pass line when the essay score is average (99 questions correct).
+> It is a reference point for where a human candidate sits, and it is **66.0** on the
+> 100-point scale.
 
 ### By subject
 
-| | Public Law | Civil Law | Criminal Law |
-|---|---|---|---|
-| High reasoning | ![Public Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_고추론.png) | ![Civil Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_고추론.png) | ![Criminal Law, high reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_고추론.png) |
-| Low reasoning | ![Public Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/공법_저추론.png) | ![Civil Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/민사법_저추론.png) | ![Criminal Law, low reasoning](https://nicetry3675.github.io/korean-bar-exam-llm/images/형사법_저추론.png) |
+**Public Law · High reasoning**
+
+![Public Law, high reasoning](docs/images/공법_고추론.png)
+
+**Public Law · Low reasoning**
+
+![Public Law, low reasoning](docs/images/공법_저추론.png)
+
+**Civil Law · High reasoning**
+
+![Civil Law, high reasoning](docs/images/민사법_고추론.png)
+
+**Civil Law · Low reasoning**
+
+![Civil Law, low reasoning](docs/images/민사법_저추론.png)
+
+**Criminal Law · High reasoning**
+
+![Criminal Law, high reasoning](docs/images/형사법_고추론.png)
+
+**Criminal Law · Low reasoning**
+
+![Criminal Law, low reasoning](docs/images/형사법_저추론.png)
+
+### Cost vs Performance
+
+The x-axis is the API-equivalent cost of solving all 150 questions; the y-axis is the
+total score. Points joined by a dashed line are the same model at different reasoning
+levels (none · low · high · max).
+
+![Cost vs performance](docs/images/비용_분석.png)
+
+The upper-left quadrant (high score, low cost) is the favourable one. Moving right means
+paying more for the same score, and a dashed line that stretches far to the right without
+rising is a model whose score does not follow its reasoning budget.
 
 ---
 

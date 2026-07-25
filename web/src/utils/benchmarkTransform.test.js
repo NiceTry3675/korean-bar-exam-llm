@@ -8,6 +8,7 @@ import {
   transformBenchmarkRadarData
 } from './benchmarkTransform.js'
 import {
+  getBenchmarkReferenceLines,
   getDefaultBenchmarkId,
   getNavigableBenchmarks,
   resolveBenchmark
@@ -145,6 +146,42 @@ test('과목 필터를 적용하면 해당 과목의 v2 점수만 합산한다',
 
   assert.equal(result.total, 97.5)
   assert.equal(result.totalLenient, 100)
+})
+
+test('기준선은 전체 만점 기준일 때만 노출된다', () => {
+  const withLine = {
+    ...benchmark,
+    referenceLines: [{ id: 'human-pass-line', score: 247.5, correctCount: 99 }]
+  }
+
+  assert.deepEqual(
+    getBenchmarkReferenceLines(withLine).map(line => line.score),
+    [247.5]
+  )
+  assert.deepEqual(
+    getBenchmarkReferenceLines(withLine, ['민사법']),
+    [],
+    '과목 필터로 만점이 달라지면 총점 기준선은 비교 대상이 아니다'
+  )
+})
+
+test('만점을 넘거나 값이 잘못된 기준선은 버린다', () => {
+  const lines = getBenchmarkReferenceLines({
+    ...benchmark,
+    referenceLines: [
+      { id: 'ok', score: 200 },
+      { id: 'over', score: 400 },
+      { id: 'zero', score: 0 },
+      { id: 'nan', score: 'abc' },
+      {}
+    ]
+  })
+  assert.deepEqual(lines.map(line => line.id), ['ok'])
+})
+
+test('기준선이 없는 벤치마크는 빈 배열을 반환한다', () => {
+  assert.deepEqual(getBenchmarkReferenceLines(benchmark), [])
+  assert.deepEqual(getBenchmarkReferenceLines(null), [])
 })
 
 test('공급자가 기록한 실제 비용을 가격표 재계산보다 우선한다', () => {

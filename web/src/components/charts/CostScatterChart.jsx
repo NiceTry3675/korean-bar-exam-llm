@@ -20,6 +20,7 @@ import { useTheme } from '@/hooks/useTheme'
 import { useExportImage, README_EXPORT_WIDTH } from '@/hooks/useExportImage'
 import { BenchmarkNote, ExportButton, ExportWatermark } from '@/components/common'
 import { formatModelDisplayName, parseEffortSuffix } from '@/utils/modelMeta'
+import { getLocalizedRegistryText } from '@/utils/benchmarkRegistry'
 
 const COST_POINT_RADIUS = 7
 const EXPORT_LABEL_GAP = 6
@@ -484,9 +485,10 @@ export default function CostScatterChart({
   title,
   height = 800,
   maxScore = 0,
-  exportKey = 'cost-scatter'
+  exportKey = 'cost-scatter',
+  referenceLines = []
 }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { isDark: darkMode } = useTheme()
   const { ref, exportImage, isExporting } = useExportImage({
     exportWidth: README_EXPORT_WIDTH,
@@ -654,6 +656,17 @@ export default function CostScatterChart({
             stroke={referenceLineColor}
             strokeWidth={1}
           />
+          {/* 점수 기준선 (객컷 등) */}
+          {referenceLines.map(line => (
+            <ReferenceLine
+              key={line.id || line.score}
+              y={line.score}
+              stroke={darkMode ? '#d1d5db' : '#374151'}
+              strokeDasharray="6 4"
+              strokeWidth={1.5}
+              strokeOpacity={0.75}
+            />
+          ))}
           {/* 같은 모델의 추론 수준끼리 점선으로 연결 (선은 점 아래에 그려진다) */}
           {chains.map(chain => (
             <Scatter
@@ -690,6 +703,25 @@ export default function CostScatterChart({
         </svg>
         <span>{t('charts.effortChainLegend')}</span>
       </div>
+      {referenceLines.map(line => (
+        <div
+          key={line.id || line.score}
+          className="flex items-center gap-1.5 mt-1 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <svg width="22" height="8" aria-hidden="true" className="shrink-0">
+            <line
+              x1="0" y1="4" x2="22" y2="4"
+              stroke={darkMode ? '#d1d5db' : '#374151'}
+              strokeWidth="1.5"
+              strokeDasharray="6 4"
+            />
+          </svg>
+          <span>
+            {getLocalizedRegistryText(line.label, i18n.language)}
+            {line.description ? ` — ${getLocalizedRegistryText(line.description, i18n.language)}` : ''}
+          </span>
+        </div>
+      ))}
       <BenchmarkNote modelNames={validData.map(item => item.model)} />
     </div>
   )

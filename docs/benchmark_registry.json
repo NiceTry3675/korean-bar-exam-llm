@@ -18,6 +18,21 @@
         "totalQuestions": 150,
         "pointsPerQuestion": 2.5
       },
+      "referenceLines": [
+        {
+          "id": "human-pass-line",
+          "score": 247.5,
+          "correctCount": 99,
+          "label": {
+            "ko": "객컷 247.5점",
+            "en": "Human cutoff 247.5"
+          },
+          "description": {
+            "ko": "주관식 성적이 평균일 때 합격선에 대응하는 선택형 점수 (99문항)",
+            "en": "Multiple-choice score matching the pass line when the essay score is average (99 questions)"
+          }
+        }
+      ],
       "modes": {
         "default": {
           "results": "bar_exam_all_results.json",

@@ -81,6 +81,25 @@ export function getNavigableBenchmarks(registry, availability = {}) {
 }
 
 /**
+ * @brief 차트에 표시할 기준선 목록 반환
+ *
+ * 기준선 점수는 전체 문항을 기준으로 정의되므로, 과목 필터로 만점이 달라지면
+ * 비교 대상이 성립하지 않는다. 이때는 빈 배열을 반환해 선을 숨긴다.
+ *
+ * @param {Object} benchmark - 벤치마크 설정
+ * @param {Array<string>} subjectFilter - 선택된 과목
+ * @return {Array<Object>} 기준선 목록
+ */
+export function getBenchmarkReferenceLines(benchmark, subjectFilter = []) {
+  if (subjectFilter?.length) return []
+  const maxScore = Number(benchmark?.scoring?.maxScore) || 0
+  return (benchmark?.referenceLines || []).filter(line => {
+    const score = Number(line?.score)
+    return Number.isFinite(score) && score > 0 && (maxScore === 0 || score <= maxScore)
+  })
+}
+
+/**
  * @brief 벤치마크의 섹션 목록을 중복 없이 정규화
  * @param {Object} benchmark - 벤치마크 설정
  * @return {Array<Object>} 정규화된 섹션 목록

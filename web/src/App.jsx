@@ -26,7 +26,7 @@ import { VENDORS, groupModelsByVendor, getSortedVendors, getDefaultSelectedModel
 import { getDashboardQueryState } from '@/utils/urlState'
 import { formatModelDisplayName, getEffortTier } from '@/utils/modelMeta'
 import { translateSubject } from '@/utils/subjectLabels'
-import { DEFAULT_BENCHMARK_ID, getBenchmarkSections, getLocalizedRegistryText } from '@/utils/benchmarkRegistry'
+import { DEFAULT_BENCHMARK_ID, getBenchmarkReferenceLines, getBenchmarkSections, getLocalizedRegistryText } from '@/utils/benchmarkRegistry'
 import {
   calculateAllBenchmarkScores,
   getBenchmarkMaxScore,
@@ -275,6 +275,12 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
   // 양쪽 등급에 모델이 있을 때만 차트를 나눈다 (접미사가 없는 벤치마크는 단일 차트)
   const scoreChartSplitByEffort = (
     scoreChartDataByEffort.high.length > 0 && scoreChartDataByEffort.low.length > 0
+  )
+
+  // 기준선(객컷 등) — 과목 필터로 만점이 달라지면 비교가 성립하지 않아 숨겨진다
+  const referenceLines = useMemo(
+    () => getBenchmarkReferenceLines(benchmark, filters.subjects),
+    [benchmark, filters.subjects]
   )
 
   const scoreChartSubtitle = filters.subjects.length === 0
@@ -655,6 +661,7 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
                         onModelHover={setHoveredModel}
                         modelMetadata={modelMetadata}
                         exportKey={exportKey}
+                        referenceLines={referenceLines}
                       />
                     </div>
                   ))
@@ -668,6 +675,7 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
                       hoveredModel={hoveredModel}
                       onModelHover={setHoveredModel}
                       modelMetadata={modelMetadata}
+                      referenceLines={referenceLines}
                     />
                   </div>
                 )}
@@ -679,6 +687,7 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
                     title={t('charts.costVsPerformance')}
                     maxScore={maxScore}
                     exportKey="overview-cost-scatter"
+                    referenceLines={referenceLines}
                   />
                 </div>
                 <div className="relative z-10 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
@@ -860,6 +869,7 @@ function Dashboard({ benchmarkMode = 'default', onBenchmarkModeChange, onBenchma
                     data={costData}
                     title={t('charts.costVsPerformance')}
                     maxScore={maxScore}
+                    referenceLines={referenceLines}
                   />
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">

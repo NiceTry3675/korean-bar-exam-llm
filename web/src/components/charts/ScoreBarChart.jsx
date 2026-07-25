@@ -22,6 +22,7 @@ import { useTheme } from '@/hooks/useTheme'
 import { useExportImage, README_EXPORT_WIDTH } from '@/hooks/useExportImage'
 import { BenchmarkNote, ExportButton, ExportWatermark } from '@/components/common'
 import { formatModelDisplayName, getModelFlags } from '@/utils/modelMeta'
+import { getLocalizedRegistryText } from '@/utils/benchmarkRegistry'
 
 const MAX_LINE_LENGTH = 21
 const MAX_LINES = 3
@@ -323,6 +324,73 @@ function _renderScoreLabel({ x, y, width, index }, { rows, fill, fontSize }) {
 }
 
 /**
+ * @brief 기준선 색상 (모델 색상과 구분되는 중립 잉크)
+ */
+const REFERENCE_LINE_COLOR = { light: '#374151', dark: '#d1d5db' }
+
+/**
+ * @brief 점수 기준선 렌더링
+ *
+ * 모델 계열이 아닌 주석이므로 모델 색상을 쓰지 않고 중립 잉크로 그린다.
+ *
+ * @param {Object} props - { lines, language, darkMode, isMobile }
+ * @return {Array<JSX.Element>} ReferenceLine 목록
+ */
+function _renderReferenceLines({ lines, language, darkMode, isMobile }) {
+  const stroke = darkMode ? REFERENCE_LINE_COLOR.dark : REFERENCE_LINE_COLOR.light
+  return lines.map(line => {
+    const text = getLocalizedRegistryText(line.label, language)
+    const axisProps = isMobile ? { x: line.score } : { y: line.score }
+    return (
+      <ReferenceLine
+        key={line.id || line.score}
+        {...axisProps}
+        stroke={stroke}
+        strokeDasharray="6 4"
+        strokeWidth={1.5}
+        strokeOpacity={0.75}
+        ifOverflow="extendDomain"
+        label={{
+          value: text,
+          position: isMobile ? 'top' : 'insideTopLeft',
+          fill: stroke,
+          fontSize: isMobile ? 10 : 12,
+          fontWeight: 600
+        }}
+      />
+    )
+  })
+}
+
+/**
+ * @brief 기준선 설명 범례 (export 이미지에도 포함)
+ * @param {Object} props - { lines, language, darkMode }
+ */
+function _ReferenceLineLegend({ lines, language, darkMode }) {
+  const stroke = darkMode ? REFERENCE_LINE_COLOR.dark : REFERENCE_LINE_COLOR.light
+  return (
+    <div className="flex flex-col gap-0.5 mb-3 text-xs text-gray-500 dark:text-gray-400">
+      {lines.map(line => (
+        <div key={line.id || line.score} className="flex items-center gap-1.5">
+          <svg width="22" height="8" aria-hidden="true" className="shrink-0">
+            <line
+              x1="0" y1="4" x2="22" y2="4"
+              stroke={stroke}
+              strokeWidth="1.5"
+              strokeDasharray="6 4"
+            />
+          </svg>
+          <span>
+            {getLocalizedRegistryText(line.label, language)}
+            {line.description ? ` — ${getLocalizedRegistryText(line.description, language)}` : ''}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/**
  * @brief v2 추가 점수 막대 범례 (export 이미지에도 포함)
  * @param {Object} props - { t, darkMode }
  */
@@ -447,6 +515,7 @@ function CustomTooltip({ active, payload, t }) {
  * @param {string} props.hoveredModel - 현재 호버된 모델명
  * @param {function} props.onModelHover - 모델 호버 콜백
  * @param {string} props.exportKey - export 이미지 대상 키
+ * @param {Array} props.referenceLines - [{ id, score, label, description }] 기준선
  */
 export default function ScoreBarChart({
   data,
@@ -457,9 +526,10 @@ export default function ScoreBarChart({
   hoveredModel,
   onModelHover,
   modelMetadata = {},
-  exportKey = 'overview-score-chart'
+  exportKey = 'overview-score-chart',
+  referenceLines = []
 }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { isDark: darkMode } = useTheme()
   const { ref, exportImage, isExporting } = useExportImage({ exportWidth: README_EXPORT_WIDTH })
   const [showLabels, setShowLabels] = useState(true)
@@ -515,6 +585,12 @@ export default function ScoreBarChart({
           />
         </div>
         {hasLenientDelta && <_LenientLegend t={t} darkMode={darkMode} />}
+      {referenceLines.length > 0 && (
+        <_ReferenceLineLegend lines={referenceLines} language={i18n.language} darkMode={darkMode} />
+      )}
+        {referenceLines.length > 0 && (
+          <_ReferenceLineLegend lines={referenceLines} language={i18n.language} darkMode={darkMode} />
+        )}
         <ResponsiveContainer width="100%" height={dynamicHeight}>
           <BarChart
             key={renderData.map(d => d.model).join(',')}
@@ -553,6 +629,7 @@ export default function ScoreBarChart({
               strokeDasharray="3 3"
               strokeWidth={2}
             />
+            {_renderReferenceLines({ lines: referenceLines, language: i18n.language, darkMode, isMobile: true })}
             <HatchPatternDefs darkMode={darkMode} />
             <Bar
               dataKey="score"
@@ -622,6 +699,9 @@ export default function ScoreBarChart({
         </button>
       </div>
       {hasLenientDelta && <_LenientLegend t={t} darkMode={darkMode} />}
+      {referenceLines.length > 0 && (
+        <_ReferenceLineLegend lines={referenceLines} language={i18n.language} darkMode={darkMode} />
+      )}
       <ResponsiveContainer width="100%" height={600}>
         <BarChart
             key={renderData.map(d => d.model).join(',')}
@@ -660,6 +740,7 @@ export default function ScoreBarChart({
               stroke={axisColor}
               strokeDasharray="3 3"
             />
+            {_renderReferenceLines({ lines: referenceLines, language: i18n.language, darkMode, isMobile: false })}
             <Tooltip content={<CustomTooltip t={t} />} cursor={{ fill: cursorColor }} />
             <HatchPatternDefs darkMode={darkMode} />
             <Bar
