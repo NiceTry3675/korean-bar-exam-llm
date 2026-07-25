@@ -530,9 +530,11 @@ export default function CostScatterChart({
     )
   }
 
-  // X축 범위 계산
+  // X축 범위 계산 (로그 스케일: 0을 표현할 수 없으므로 최소 비용 기반 하한 사용)
   const dataMaxCost = Math.max(...validData.map(d => d.totalCost))
+  const dataMinCost = Math.min(...validData.map(d => d.totalCost))
   const maxCost = dataMaxCost * 1.1  // 10% 여유
+  const minCost = dataMinCost / 1.1
 
   // Y축 범위 계산 (최대값은 만점 기준, 최소값은 데이터 기반)
   const dataMinScore = Math.min(...validData.map(d => d.score))
@@ -549,15 +551,21 @@ export default function CostScatterChart({
     yTicks.push(i)
   }
 
-  // 중앙 기준선 (축 범위의 중앙)
-  const midCost = maxCost / 2
+  // 중앙 기준선 (로그축에서 시각적 중앙에 오도록 기하평균 사용)
+  const midCost = Math.sqrt(minCost * maxCost)
   const midScore = (yMin + yMax) / 2
 
-  // X축 tick 생성 (정수 간격, 마지막 제외)
-  const xTickInterval = Math.ceil(maxCost / 5)  // 약 5등분
+  // X축 tick 생성 (로그축용 1-2-5 패턴)
   const xTicks = []
-  for (let i = 0; i <= maxCost; i += xTickInterval) {
-    xTicks.push(i)
+  for (
+    let magnitude = Math.pow(10, Math.floor(Math.log10(minCost)));
+    magnitude <= maxCost;
+    magnitude *= 10
+  ) {
+    for (const step of [1, 2, 5]) {
+      const tick = magnitude * step
+      if (tick >= minCost && tick <= maxCost) xTicks.push(tick)
+    }
   }
 
   // 추론 수준별 연결선 그룹
@@ -613,18 +621,19 @@ export default function CostScatterChart({
         >
           {/* 다크모드 차트 영역 배경 (gray-800~900 중간: #182130) */}
           {darkMode && (
-            <ReferenceArea x1={0} x2={maxCost} y1={yMin} y2={yMax} fill="#182130" fillOpacity={1} />
+            <ReferenceArea x1={minCost} x2={maxCost} y1={yMin} y2={yMax} fill="#182130" fillOpacity={1} />
           )}
           {/* 4분면 배경색 (다크모드: 투명도 0.4로 대비 강화) */}
           {/* 좌상: 고성능-저비용 (초록) */}
-          <ReferenceArea x1={0} x2={midCost} y1={midScore} y2={yMax} fill={darkMode ? '#22c55e' : '#bbf7d0'} fillOpacity={darkMode ? 0.4 : 0.5} />
+          <ReferenceArea x1={minCost} x2={midCost} y1={midScore} y2={yMax} fill={darkMode ? '#22c55e' : '#bbf7d0'} fillOpacity={darkMode ? 0.4 : 0.5} />
           {/* 우하: 저성능-고비용 (빨강) */}
           <ReferenceArea x1={midCost} x2={maxCost} y1={yMin} y2={midScore} fill={darkMode ? '#ef4444' : '#fecaca'} fillOpacity={darkMode ? 0.4 : 0.5} />
           <XAxis
             type="number"
             dataKey="totalCost"
             name={t('cost.testCost')}
-            domain={[0, maxCost]}
+            scale="log"
+            domain={[minCost, maxCost]}
             ticks={xTicks}
             tickFormatter={(v) => `$${v}`}
             tickLine={false}
