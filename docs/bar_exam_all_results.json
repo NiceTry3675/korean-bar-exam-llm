@@ -16,7 +16,7 @@
       "input_tokens": 40113,
       "output_tokens": 60211,
       "total_tokens": 100324,
-      "cost_usd": 3.4116800000000005
+      "cost_usd": 3.41168
     },
     "price": {
       "input": 10.0,
@@ -1566,7 +1566,7 @@
       "input_tokens": 40113,
       "output_tokens": 19221,
       "total_tokens": 59334,
-      "cost_usd": 0.68109
+      "cost_usd": 0.6810900000000001
     },
     "price": {
       "input": 5.0,
@@ -1955,7 +1955,7 @@
       "input_tokens": 40113,
       "output_tokens": 63237,
       "total_tokens": 103350,
-      "cost_usd": 1.7814899999999998
+      "cost_usd": 1.7814900000000002
     },
     "price": {
       "input": 5.0,
@@ -2730,7 +2730,7 @@
       "input_tokens": 40113,
       "output_tokens": 21516,
       "total_tokens": 61629,
-      "cost_usd": 0.738465
+      "cost_usd": 0.7384649999999999
     },
     "price": {
       "input": 5.0,
@@ -3918,7 +3918,7 @@
       "input_tokens": 40113,
       "output_tokens": 25204,
       "total_tokens": 65317,
-      "cost_usd": 0.498399
+      "cost_usd": 0.49839900000000004
     },
     "price": {
       "input": 3.0,
@@ -10086,6 +10086,392 @@
   {
     "benchmark_id": "bar-exam-15",
     "run_mode": "question",
+    "sheet_name": "공법",
+    "subject": "공법",
+    "section": "공법",
+    "model_name": "Claude Fable 5 (low)",
+    "score": 90.0,
+    "total_points": 100.0,
+    "correct_count": 36,
+    "total_questions": 40,
+    "score_lenient": 90.0,
+    "correct_count_lenient": 36,
+    "token_usage": {
+      "input_tokens": 40113,
+      "output_tokens": 8742,
+      "total_tokens": 48855,
+      "cost_usd": 0.8382299999999999
+    },
+    "price": {
+      "input": 10.0,
+      "output": 50.0
+    },
+    "results": [
+      {
+        "question_number": 1,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 2,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 3,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 4,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 5,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 6,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 7,
+        "extracted_answer": 5,
+        "correct_answer": 4,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 8,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 9,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 10,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 11,
+        "extracted_answer": 2,
+        "correct_answer": 5,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 12,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 13,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 14,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 15,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 16,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 17,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 18,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 19,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 20,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 21,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 22,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 23,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 24,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 25,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 26,
+        "extracted_answer": 3,
+        "correct_answer": 5,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 27,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 28,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 29,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 30,
+        "extracted_answer": 1,
+        "correct_answer": 4,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 31,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 32,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 33,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 34,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 35,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 36,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 37,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 38,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 39,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 40,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      }
+    ]
+  },
+  {
+    "benchmark_id": "bar-exam-15",
+    "run_mode": "question",
     "sheet_name": "민사법",
     "subject": "민사법",
     "section": "민사법",
@@ -12071,7 +12457,7 @@
       "input_tokens": 61100,
       "output_tokens": 101171,
       "total_tokens": 162271,
-      "cost_usd": 2.834775
+      "cost_usd": 2.8347750000000005
     },
     "price": {
       "input": 5.0,
@@ -12727,7 +13113,7 @@
       "input_tokens": 61170,
       "output_tokens": 49473,
       "total_tokens": 110643,
-      "cost_usd": 1.542675
+      "cost_usd": 1.5426749999999998
     },
     "price": {
       "input": 5.0,
@@ -13383,7 +13769,7 @@
       "input_tokens": 61170,
       "output_tokens": 127782,
       "total_tokens": 188952,
-      "cost_usd": 3.5004
+      "cost_usd": 3.5003999999999995
     },
     "price": {
       "input": 5.0,
@@ -14039,7 +14425,7 @@
       "input_tokens": 61170,
       "output_tokens": 528116,
       "total_tokens": 589286,
-      "cost_usd": 13.508750000000001
+      "cost_usd": 13.508750000000003
     },
     "price": {
       "input": 5.0,
@@ -14695,7 +15081,7 @@
       "input_tokens": 61170,
       "output_tokens": 63414,
       "total_tokens": 124584,
-      "cost_usd": 1.8912000000000002
+      "cost_usd": 1.8911999999999995
     },
     "price": {
       "input": 5.0,
@@ -18697,7 +19083,7 @@
       "input_tokens": 36706,
       "output_tokens": 16987,
       "total_tokens": 53693,
-      "cost_usd": 0.138628
+      "cost_usd": 0.13862800000000003
     },
     "price": {
       "input": 1.0,
@@ -20665,7 +21051,7 @@
       "input_tokens": 36706,
       "output_tokens": 19447,
       "total_tokens": 56153,
-      "cost_usd": 0.7669400000000004
+      "cost_usd": 0.7669400000000003
     },
     "price": {
       "input": 5.0,
@@ -22633,7 +23019,7 @@
       "input_tokens": 36706,
       "output_tokens": 17609,
       "total_tokens": 54315,
-      "cost_usd": 0.3559000000000001
+      "cost_usd": 0.35590000000000005
     },
     "price": {
       "input": 2.5,
@@ -27211,6 +27597,662 @@
   {
     "benchmark_id": "bar-exam-15",
     "run_mode": "question",
+    "sheet_name": "민사법",
+    "subject": "민사법",
+    "section": "민사법",
+    "model_name": "Claude Fable 5 (low)",
+    "score": 155.0,
+    "total_points": 175.0,
+    "correct_count": 62,
+    "total_questions": 70,
+    "score_lenient": 155.0,
+    "correct_count_lenient": 62,
+    "token_usage": {
+      "input_tokens": 61170,
+      "output_tokens": 25726,
+      "total_tokens": 86896,
+      "cost_usd": 1.8980000000000001
+    },
+    "price": {
+      "input": 10.0,
+      "output": 50.0
+    },
+    "results": [
+      {
+        "question_number": 1,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 2,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 3,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 4,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 5,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 6,
+        "extracted_answer": 5,
+        "correct_answer": 1,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 7,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 8,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 9,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 10,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 11,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 12,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 13,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 14,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 15,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 16,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 17,
+        "extracted_answer": 4,
+        "correct_answer": 1,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 18,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 19,
+        "extracted_answer": 2,
+        "correct_answer": 4,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 20,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 21,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 22,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 23,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 24,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 25,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 26,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 27,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 28,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 29,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 30,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 31,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 32,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 33,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 34,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 35,
+        "extracted_answer": 1,
+        "correct_answer": 4,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 36,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 37,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 38,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 39,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 40,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 41,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 42,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 43,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 44,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 45,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 46,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 47,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 48,
+        "extracted_answer": 2,
+        "correct_answer": 3,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 49,
+        "extracted_answer": 5,
+        "correct_answer": 1,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 50,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 51,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 52,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 53,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 54,
+        "extracted_answer": 5,
+        "correct_answer": 3,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 55,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 56,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 57,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 58,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 59,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 60,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 61,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 62,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 63,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 64,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 65,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 66,
+        "extracted_answer": 2,
+        "correct_answer": 3,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 67,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 68,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 69,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 70,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      }
+    ]
+  },
+  {
+    "benchmark_id": "bar-exam-15",
+    "run_mode": "question",
     "sheet_name": "형사법",
     "subject": "형사법",
     "section": "형사법",
@@ -28790,7 +29832,7 @@
       "input_tokens": 39763,
       "output_tokens": 29629,
       "total_tokens": 69392,
-      "cost_usd": 0.9395400000000002
+      "cost_usd": 0.93954
     },
     "price": {
       "input": 5.0,
@@ -29176,7 +30218,7 @@
       "input_tokens": 39763,
       "output_tokens": 100412,
       "total_tokens": 140175,
-      "cost_usd": 2.709115
+      "cost_usd": 2.7091149999999997
     },
     "price": {
       "input": 5.0,
@@ -29562,7 +30604,7 @@
       "input_tokens": 39763,
       "output_tokens": 240472,
       "total_tokens": 280235,
-      "cost_usd": 6.210615000000001
+      "cost_usd": 6.2106150000000016
     },
     "price": {
       "input": 5.0,
@@ -29948,7 +30990,7 @@
       "input_tokens": 39763,
       "output_tokens": 32601,
       "total_tokens": 72364,
-      "cost_usd": 1.01384
+      "cost_usd": 1.0138399999999999
     },
     "price": {
       "input": 5.0,
@@ -31145,7 +32187,7 @@
       "input_tokens": 39763,
       "output_tokens": 38300,
       "total_tokens": 78063,
-      "cost_usd": 0.6937890000000002
+      "cost_usd": 0.6937889999999999
     },
     "price": {
       "input": 3.0,
@@ -32306,7 +33348,7 @@
       "input_tokens": 23762,
       "output_tokens": 11278,
       "total_tokens": 35040,
-      "cost_usd": 0.09143
+      "cost_usd": 0.09143000000000001
     },
     "price": {
       "input": 1.0,
@@ -34625,7 +35667,7 @@
       "input_tokens": 23762,
       "output_tokens": 10960,
       "total_tokens": 34722,
-      "cost_usd": 0.22380500000000003
+      "cost_usd": 0.223805
     },
     "price": {
       "input": 2.5,
@@ -37208,6 +38250,395 @@
         "points": 2.5,
         "answer_status": "answered",
         "provider_stop_reason": null
+      },
+      {
+        "question_number": 30,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 31,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 32,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 33,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 34,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 35,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 36,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 37,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 38,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 39,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 40,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      }
+    ]
+  },
+  {
+    "benchmark_id": "bar-exam-15",
+    "run_mode": "question",
+    "sheet_name": "형사법",
+    "subject": "형사법",
+    "section": "형사법",
+    "model_name": "Claude Fable 5 (low)",
+    "score": 87.5,
+    "total_points": 100.0,
+    "correct_count": 35,
+    "total_questions": 40,
+    "score_lenient": 87.5,
+    "correct_count_lenient": 35,
+    "token_usage": {
+      "input_tokens": 39763,
+      "output_tokens": 14092,
+      "total_tokens": 53855,
+      "cost_usd": 1.10223
+    },
+    "price": {
+      "input": 10.0,
+      "output": 50.0
+    },
+    "results": [
+      {
+        "question_number": 1,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 2,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 3,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 4,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 5,
+        "extracted_answer": 3,
+        "correct_answer": 1,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 6,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 7,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 8,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 9,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 10,
+        "extracted_answer": 3,
+        "correct_answer": 2,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 11,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 12,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 13,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 14,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 15,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 16,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 17,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 18,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 19,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 20,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 21,
+        "extracted_answer": 5,
+        "correct_answer": 5,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 22,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 23,
+        "extracted_answer": 2,
+        "correct_answer": 5,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 24,
+        "extracted_answer": 1,
+        "correct_answer": 1,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 25,
+        "extracted_answer": 4,
+        "correct_answer": 4,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 26,
+        "extracted_answer": 3,
+        "correct_answer": 3,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 27,
+        "extracted_answer": 2,
+        "correct_answer": 2,
+        "is_correct": true,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 28,
+        "extracted_answer": 1,
+        "correct_answer": 2,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "answered",
+        "provider_stop_reason": null
+      },
+      {
+        "question_number": 29,
+        "extracted_answer": null,
+        "correct_answer": 1,
+        "is_correct": false,
+        "points": 2.5,
+        "answer_status": "parse_failed",
+        "provider_stop_reason": null,
+        "lenient_answer": 4,
+        "lenient_status": "answered",
+        "lenient_is_correct": false
       },
       {
         "question_number": 30,
