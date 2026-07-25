@@ -48,6 +48,18 @@ before the answer. In the charts below, **high-reasoning** groups the max·high 
 
 ![Overall score comparison - low reasoning](docs/images/전체_저추론.png)
 
+**Cost vs performance**
+
+The x-axis is the API-equivalent cost of solving all 150 questions; the y-axis is the
+total score. Points joined by a dashed line are the same model at different reasoning
+levels (none · low · high · max).
+
+![Cost vs performance](docs/images/비용_분석.png)
+
+The upper-left quadrant (high score, low cost) is the favourable one. Moving right means
+paying more for the same score, and a dashed line that stretches far to the right without
+rising is a model whose score does not follow its reasoning budget.
+
 | Model | Public Law | Civil Law | Criminal Law | Total | Score /100 | Answered | API-equivalent cost | Output tokens |
 |---|---|---|---|---|---|---|---|---|
 | Claude Fable 5 (max) | 97.5 | 167.5 | 97.5 | **362.5** | 96.7 | 150/150 | $71.13 | 1.39M |
@@ -117,18 +129,6 @@ before the answer. In the charts below, **high-reasoning** groups the max·high 
 **Criminal Law · Low reasoning**
 
 ![Criminal Law, low reasoning](docs/images/형사법_저추론.png)
-
-### Cost vs Performance
-
-The x-axis is the API-equivalent cost of solving all 150 questions; the y-axis is the
-total score. Points joined by a dashed line are the same model at different reasoning
-levels (none · low · high · max).
-
-![Cost vs performance](docs/images/비용_분석.png)
-
-The upper-left quadrant (high score, low cost) is the favourable one. Moving right means
-paying more for the same score, and a dashed line that stretches far to the right without
-rising is a model whose score does not follow its reasoning budget.
 
 ---
 
